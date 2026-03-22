@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보처리기사 실기 단권화 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #f7f8fc;
+  --surface:  #ffffff;
+  --navy:     #0f2557;
+  --blue:     #1a56db;
+  --sky:      #3b82f6;
+  --teal:     #0d9488;
+  --green:    #16a34a;
+  --amber:    #d97706;
+  --red:      #dc2626;
+  --purple:   #7c3aed;
+  --pink:     #db2777;
+  --orange:   #ea580c;
+  --indigo:   #4338ca;
+  --slate:    #475569;
+  --border:   #e2e8f0;
+  --text:     #1e293b;
+  --muted:    #64748b;
+  --light:    #f1f5f9;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ══ 사이드바 ══ */
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: 240px; background: var(--navy);
+  overflow-y: auto; z-index: 100;
+  padding: 0 0 40px;
+}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:99px}
+
+.sidebar-logo {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sidebar-logo-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 2px; color: #fff;
+  line-height: 1.1;
+}
+.sidebar-logo-sub { font-size: 10px; color: rgba(255,255,255,.45); letter-spacing: 1px; margin-top: 3px; }
+
+.nav-section { padding: 12px 0 4px 20px; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,.3); text-transform: uppercase; }
+
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 20px; cursor: pointer;
+  font-size: 12px; color: rgba(255,255,255,.6);
+  border-left: 2px solid transparent;
+  transition: all .2s; text-decoration: none;
+}
+.nav-item:hover { color: #fff; background: rgba(255,255,255,.06); }
+.nav-item.active { color: #fff; border-left-color: var(--sky); background: rgba(59,130,246,.12); }
+.nav-item .nav-icon { font-size: 14px; width: 18px; text-align: center; }
+.nav-item .nav-badge {
+  margin-left: auto; font-size: 9px; padding: 1px 6px; border-radius: 99px;
+  background: rgba(255,255,255,.1); color: rgba(255,255,255,.5);
+}
+
+/* ══ 메인 콘텐츠 ══ */
+.main {
+  margin-left: 240px;
+  padding: 0 0 80px;
+}
+
+/* ══ 히어로 ══ */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a8f 50%, #0d2557 100%);
+  padding: 60px 48px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(59,130,246,.15) 0%, transparent 60%),
+                    radial-gradient(circle at 80% 20%, rgba(13,148,136,.12) 0%, transparent 50%);
+}
+.hero::after {
+  content: '';
+  position: absolute; right: -60px; top: -60px;
+  width: 320px; height: 320px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 50%;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-label { font-size: 11px; letter-spacing: 3px; color: var(--sky); text-transform: uppercase; margin-bottom: 10px; }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; letter-spacing: 2px; color: #fff; line-height: 1.1;
+  margin-bottom: 12px;
+}
+.hero-title span { color: var(--sky); }
+.hero-desc { font-size: 14px; color: rgba(255,255,255,.55); max-width: 520px; }
+.hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+.hero-pill {
+  padding: 5px 14px; border-radius: 99px; font-size: 11px; font-weight: 700;
+  border: 1px solid; cursor: pointer; transition: all .2s;
+}
+.hero-pill-all { color: var(--sky); border-color: var(--sky); background: rgba(59,130,246,.1); }
+.hero-pill-all:hover { background: rgba(59,130,246,.25); }
+
+/* ══ 섹션 래퍼 ══ */
+.content-wrap { padding: 0 40px; }
+
+/* ══ 파트 헤더 ══ */
+.part-header {
+  display: flex; align-items: center; gap: 16px;
+  padding: 40px 40px 0;
+  margin-bottom: 8px;
+}
+.part-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; letter-spacing: 3px; color: var(--muted);
+}
+.part-title {
+  font-size: 22px; font-weight: 900; color: var(--navy);
+  position: relative;
+}
+.part-title::after {
+  content: '';
+  position: absolute; left: 0; bottom: -3px;
+  width: 40px; height: 3px; border-radius: 99px;
+}
+
+/* ══ 카드 ══ */
+.card {
+  background: var(--surface);
+  border-radius: 16px; padding: 28px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.card.blue::before  { background: linear-gradient(90deg, var(--blue), var(--sky)); }
+.card.teal::before  { background: linear-gradient(90deg, var(--teal), #06b6d4); }
+.card.green::before { background: linear-gradient(90deg, var(--green), #4ade80); }
+.card.amber::before { background: linear-gradient(90deg, var(--amber), #fbbf24); }
+.card.red::before   { background: linear-gradient(90deg, var(--red), #f87171); }
+.card.purple::before{ background: linear-gradient(90deg, var(--purple), #a78bfa); }
+.card.navy::before  { background: linear-gradient(90deg, var(--navy), var(--blue)); }
+
+.card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.card-title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 700; color: var(--navy);
+}
+.card-title .icon { font-size: 18px; }
+
+/* ══ 빈출 뱃지 ══ */
+.freq {
+  display: inline-flex; align-items: center; gap: 2px;
+  font-size: 11px; font-weight: 700;
+}
+.star { color: var(--amber); }
+.star.off { color: #d1d5db; }
+
+/* ══ 테이블 ══ */
+.vtable { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+.vtable th {
+  background: var(--navy); color: #fff; padding: 9px 12px;
+  text-align: left; font-size: 12px; font-weight: 600;
+}
+.vtable th:first-child { border-radius: 8px 0 0 0; }
+.vtable th:last-child { border-radius: 0 8px 0 0; }
+.vtable td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.vtable tr:last-child td { border-bottom: none; }
+.vtable tr:nth-child(even) td { background: var(--light); }
+.vtable tr:hover td { background: #eff6ff; }
+.vtable .mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+/* ══ 강조 박스 ══ */
+.trap-box {
+  background: #fef2f2; border: 1.5px solid #fecaca;
+  border-left: 4px solid var(--red);
+  border-radius: 10px; padding: 14px 18px;
+  margin-top: 14px;
+}
+.trap-box .trap-title {
+  font-size: 12px; font-weight: 700; color: var(--red);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.trap-box ul { margin: 0; padding-left: 18px; }
+.trap-box li { font-size: 13px; line-height: 1.8; color: #7f1d1d; }
+.trap-box li strong { color: var(--red); }
+
+.memo-box {
+  background: #eff6ff; border: 1.5px solid #bfdbfe;
+  border-left: 4px solid var(--blue);
+  border-radius: 10px; padding: 14px 18px;
+  margin-top: 14px;
+}
+.memo-box .memo-title {
+  font-size: 12px; font-weight: 700; color: var(--blue);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.memo-box ul { margin: 0; padding-left: 18px; }
+.memo-box li { font-size: 13px; line-height: 1.8; color: #1e40af; }
+.memo-box li strong { color: var(--navy); }
+
+.tip-box {
+  background: #f0fdf4; border: 1.5px solid #bbf7d0;
+  border-left: 4px solid var(--green);
+  border-radius: 10px; padding: 14px 18px;
+  margin-top: 14px;
+}
+
+/* ══ 코드 블럭 ══ */
+.code-block {
+  background: #0f172a; border-radius: 10px; padding: 16px 20px;
+  margin-top: 12px; overflow-x: auto;
+}
+.code-block code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px; line-height: 1.8; color: #e2e8f0;
+}
+.code-block .kw  { color: #60a5fa; }
+.code-block .str { color: #4ade80; }
+.code-block .cm  { color: #64748b; }
+.code-block .num { color: #fb923c; }
+.code-block .fn  { color: #a78bfa; }
+
+/* ══ 그리드 ══ */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; }
+
+/* ══ 미니 카드 ══ */
+.mini-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px;
+}
+.mini-card-title { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* ══ 태그 ══ */
+.tag {
+  display: inline-block; padding: 2px 8px;
+  border-radius: 99px; font-size: 11px; font-weight: 600;
+}
+.tag-blue   { background: #dbeafe; color: #1d4ed8; }
+.tag-green  { background: #dcfce7; color: #15803d; }
+.tag-red    { background: #fee2e2; color: #b91c1c; }
+.tag-amber  { background: #fef3c7; color: #b45309; }
+.tag-purple { background: #ede9fe; color: #6d28d9; }
+.tag-teal   { background: #ccfbf1; color: #0f766e; }
+.tag-gray   { background: #f1f5f9; color: #475569; }
+
+/* ══ 플로우 다이어그램 ══ */
+.flow {
+  display: flex; align-items: center; gap: 4px;
+  flex-wrap: wrap; margin-top: 10px;
+}
+.flow-step {
+  background: var(--navy); color: #fff;
+  padding: 8px 14px; border-radius: 8px;
+  font-size: 12px; font-weight: 700;
+  white-space: nowrap;
+}
+.flow-step.highlight { background: var(--blue); }
+.flow-step.red { background: var(--red); }
+.flow-step.teal { background: var(--teal); }
+.flow-step.amber { background: var(--amber); }
+.flow-step.green { background: var(--green); }
+.flow-arrow { color: var(--muted); font-size: 16px; font-weight: 700; }
+
+/* ══ 비교 카드 ══ */
+.vs-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 12px; }
+.vs-col { padding: 16px; }
+.vs-col:first-child { border-right: 1px solid var(--border); background: #eff6ff; }
+.vs-col:last-child  { background: #fff7ed; }
+.vs-label { font-size: 11px; font-weight: 700; margin-bottom: 10px; letter-spacing: 1px; }
+.vs-label.blue   { color: var(--blue); }
+.vs-label.orange { color: var(--orange); }
+.vs-item { font-size: 12px; line-height: 1.9; color: var(--slate); }
+.vs-item strong { color: var(--text); font-weight: 700; }
+
+/* ══ OSI 계층 시각화 ══ */
+.osi-stack { margin-top: 12px; }
+.osi-layer {
+  display: flex; align-items: stretch;
+  margin-bottom: 3px; border-radius: 8px; overflow: hidden;
+  transition: transform .15s;
+}
+.osi-layer:hover { transform: translateX(4px); }
+.osi-num {
+  width: 36px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff;
+  flex-shrink: 0;
+}
+.osi-name { padding: 8px 14px; font-size: 13px; font-weight: 700; color: #fff; flex: 1; display: flex; align-items: center; }
+.osi-detail { padding: 8px 14px; font-size: 11px; color: rgba(255,255,255,.7); display: flex; align-items: center; }
+.osi-unit {
+  padding: 6px 12px; font-size: 10px; font-weight: 700;
+  display: flex; align-items: center;
+  background: rgba(0,0,0,.15); color: rgba(255,255,255,.8);
+  border-left: 1px solid rgba(255,255,255,.1);
+  min-width: 70px; justify-content: center;
+}
+
+/* ══ 암호화 다이어그램 ══ */
+.crypto-diagram { display: flex; align-items: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.crypto-node {
+  background: var(--navy); color: #fff;
+  border-radius: 10px; padding: 12px 16px;
+  text-align: center; font-size: 12px; font-weight: 700;
+}
+.crypto-key {
+  border: 2px dashed; border-radius: 10px; padding: 8px 14px;
+  text-align: center; font-size: 11px; font-weight: 600;
+}
+.crypto-arrow { font-size: 20px; color: var(--muted); }
+
+/* ══ 정렬 복잡도 바 ══ */
+.complexity-bars { margin-top: 12px; }
+.cbar { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+.cbar-label { font-size: 12px; font-weight: 600; width: 60px; }
+.cbar-track { flex: 1; height: 20px; background: var(--light); border-radius: 99px; overflow: hidden; }
+.cbar-fill { height: 100%; border-radius: 99px; display: flex; align-items: center; padding-left: 10px; }
+.cbar-fill span { font-size: 10px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace; }
+
+/* ══ 트리 순회 시각화 ══ */
+.tree-viz { background: var(--light); border-radius: 12px; padding: 20px; margin-top: 12px; }
+.tree-svg-wrap { text-align: center; margin-bottom: 12px; }
+.traversal-row { display: grid; grid-template-columns: 90px 1fr; gap: 10px; align-items: center; margin-bottom: 8px; }
+.traversal-label { font-size: 11px; font-weight: 700; }
+.traversal-steps { display: flex; gap: 4px; flex-wrap: wrap; }
+.traversal-step {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+  color: #fff;
+}
+
+/* ══ 디자인 패턴 그리드 ══ */
+.pattern-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 12px; }
+.pattern-card {
+  border-radius: 10px; padding: 14px;
+  border: 1px solid; cursor: default;
+  transition: transform .15s, box-shadow .15s;
+}
+.pattern-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.pattern-card-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.pattern-card-desc { font-size: 11px; line-height: 1.5; opacity: .75; }
+.pattern-card-freq { margin-top: 6px; }
+
+/* ══ 정규화 단계 시각화 ══ */
+.norm-steps { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.norm-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 10px;
+  background: var(--light); border: 1px solid var(--border);
+  transition: background .2s;
+}
+.norm-step:hover { background: #eff6ff; }
+.norm-step-badge {
+  width: 50px; padding: 4px 0; border-radius: 8px;
+  text-align: center; font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; color: #fff; flex-shrink: 0;
+}
+.norm-step-text { flex: 1; }
+.norm-step-cond { font-size: 12px; font-weight: 700; color: var(--navy); }
+.norm-step-desc { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.norm-step-freq { margin-left: auto; }
+
+/* ══ ACID 카드 ══ */
+.acid-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+.acid-card {
+  border-radius: 12px; padding: 16px 12px; text-align: center;
+  border: 1px solid;
+}
+.acid-letter {
+  font-family: 'Bebas Neue', sans-serif; font-size: 36px;
+  line-height: 1;
+}
+.acid-name { font-size: 12px; font-weight: 700; margin-top: 4px; }
+.acid-eng  { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.acid-desc { font-size: 11px; margin-top: 8px; color: var(--slate); }
+
+/* ══ 스크롤바 ══ */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+
+/* ══ 섹션 구분자 ══ */
+.section-divider { padding: 0 40px; }
+.divider-line { border: none; border-top: 1px solid var(--border); margin: 10px 0 0; }
+
+/* ══ 키워드 하이라이트 ══ */
+.hl-blue   { background: #dbeafe; color: #1d4ed8; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+.hl-red    { background: #fee2e2; color: #b91c1c; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+.hl-green  { background: #dcfce7; color: #15803d; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+.hl-amber  { background: #fef3c7; color: #b45309; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+
+/* ══ 반응형 ══ */
+@media (max-width: 900px) {
+  .sidebar { width: 200px; }
+  .main { margin-left: 200px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .acid-grid { grid-template-columns: repeat(2,1fr); }
+  .content-wrap, .part-header, .section-divider { padding-left: 20px; padding-right: 20px; }
+  .hero { padding: 36px 24px; }
+}
+@media (max-width: 640px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+}
+
+/* ══ 애니메이션 ══ */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+.card { animation: fadeIn .3s ease both; }
+
+/* ══ 프린트 ══ */
+@media print {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- 사이드바 -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-title">정처기 실기<br>단권화 노트</div>
+    <div class="sidebar-logo-sub">2025 최신 기출 반영</div>
+  </div>
+
+  <div class="nav-section">PART 01</div>
+  <a class="nav-item" href="#p1-uml"><span class="nav-icon">📐</span>UML <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p1-pattern"><span class="nav-icon">🧩</span>디자인 패턴 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p1-req"><span class="nav-icon">📋</span>요구사항 분석</a>
+
+  <div class="nav-section">PART 02</div>
+  <a class="nav-item" href="#p2-ds"><span class="nav-icon">🗂</span>자료구조 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p2-sort"><span class="nav-icon">📊</span>정렬 알고리즘 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p2-test"><span class="nav-icon">🧪</span>소프트웨어 테스트</a>
+
+  <div class="nav-section">PART 03</div>
+  <a class="nav-item" href="#p3-sql"><span class="nav-icon">🗄</span>SQL <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p3-norm"><span class="nav-icon">🔧</span>정규화 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p3-tx"><span class="nav-icon">⚙️</span>트랜잭션 <span class="nav-badge">★★★</span></a>
+
+  <div class="nav-section">PART 04</div>
+  <a class="nav-item" href="#p4-c"><span class="nav-icon">💻</span>C언어 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p4-java"><span class="nav-icon">☕</span>Java <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p4-py"><span class="nav-icon">🐍</span>Python <span class="nav-badge">★★☆</span></a>
+
+  <div class="nav-section">PART 05</div>
+  <a class="nav-item" href="#p5-crypto"><span class="nav-icon">🔐</span>암호화 알고리즘 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p5-attack"><span class="nav-icon">⚠️</span>보안 공격 유형</a>
+
+  <div class="nav-section">PART 06</div>
+  <a class="nav-item" href="#p6-osi"><span class="nav-icon">🌐</span>OSI 7계층 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p6-tcp"><span class="nav-icon">📡</span>TCP vs UDP <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p6-ip"><span class="nav-icon">🔢</span>IP 주소</a>
+
+  <div class="nav-section">PART 07</div>
+  <a class="nav-item" href="#p7-method"><span class="nav-icon">🚀</span>개발 방법론 <span class="nav-badge">★★★</span></a>
+  <a class="nav-item" href="#p7-quality"><span class="nav-icon">🏆</span>소프트웨어 품질</a>
+
+  <div class="nav-section">PART 08</div>
+  <a class="nav-item" href="#p8-final"><span class="nav-icon">🎯</span>최종 암기 리스트</a>
+</nav>
+
+<!-- 메인 -->
+<main class="main">
+
+<!-- 히어로 -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-label">정보처리기사 실기 단권화 노트</div>
+    <h1 class="hero-title">기출 분석 <span>핵심</span> 노트</h1>
+    <p class="hero-desc">빈출도 · 함정 포인트 · 암기 리스트 완전 수록 | 2025년 최신 기출 반영판</p>
+    <div class="hero-pills">
+      <span class="hero-pill hero-pill-all">★★★ 최빈출 반드시 암기</span>
+      <span class="hero-pill" style="color:#ef4444;border-color:#ef4444;background:rgba(239,68,68,.1)">⚠ 함정 포인트 주의</span>
+      <span class="hero-pill" style="color:#60a5fa;border-color:#60a5fa;background:rgba(96,165,250,.1)">📝 암기 사항</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PART 01 ════════ -->
+<div class="part-header" id="part01">
+  <span class="part-num">PART 01</span>
+  <h2 class="part-title" style="color:var(--blue)">소프트웨어 설계</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+
+<div class="content-wrap" style="padding-top:24px">
+
+  <!-- UML -->
+  <div class="card blue" id="p1-uml">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">📐</span>1-1 UML (Unified Modeling Language)</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <p style="font-size:13px;color:var(--slate);margin-bottom:12px">객체지향 소프트웨어 개발 표준 모델링 언어. <span class="hl-blue">구조 다이어그램</span>과 <span class="hl-amber">행위 다이어그램</span>으로 분류.</p>
+        <table class="vtable">
+          <tr><th>분류</th><th>종류</th><th>설명</th><th>빈출</th></tr>
+          <tr><td rowspan="4" style="background:#eff6ff;font-weight:700;font-size:12px;color:var(--blue)">구조<br>(Structure)</td><td>클래스(Class)</td><td>클래스·속성·관계 표현 (가장 많이 사용)</td><td><span class="freq"><span class="star">★★★</span></span></td></tr>
+          <tr><td>객체(Object)</td><td>클래스 인스턴스 상태</td><td><span class="freq"><span class="star">★</span><span class="star off">★★</span></span></td></tr>
+          <tr><td>컴포넌트</td><td>물리적 컴포넌트 간 관계</td><td><span class="freq"><span class="star">★★</span><span class="star off">★</span></span></td></tr>
+          <tr><td>배치(Deployment)</td><td>HW에 SW 배치 구조</td><td><span class="freq"><span class="star">★</span><span class="star off">★★</span></span></td></tr>
+          <tr><td rowspan="5" style="background:#fef9ee;font-weight:700;font-size:12px;color:var(--amber)">행위<br>(Behavior)</td><td>유스케이스</td><td>사용자 관점 기능 요구사항</td><td><span class="freq"><span class="star">★★★</span></span></td></tr>
+          <tr><td>시퀀스</td><td>객체 간 메시지 순서</td><td><span class="freq"><span class="star">★★★</span></span></td></tr>
+          <tr><td>활동(Activity)</td><td>처리 로직·업무 흐름</td><td><span class="freq"><span class="star">★★</span><span class="star off">★</span></span></td></tr>
+          <tr><td>상태(State)</td><td>객체 상태 변화</td><td><span class="freq"><span class="star">★★</span><span class="star off">★</span></span></td></tr>
+          <tr><td>협력(Collaboration)</td><td>객체 간 상호작용</td><td><span class="freq"><span class="star">★</span><span class="star off">★★</span></span></td></tr>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px">클래스 다이어그램 관계 비교</p>
+        <table class="vtable">
+          <tr><th>관계</th><th>표기</th><th>의미</th><th>예시</th></tr>
+          <tr><td>연관</td><td class="mono">───────▶</td><td>단순 참조</td><td>학생→강좌</td></tr>
+          <tr><td style="color:var(--blue);font-weight:700">집합(Aggregation)</td><td class="mono" style="color:var(--blue)">◇────</td><td>부분이 독립 존재 가능</td><td>학과◇─교수</td></tr>
+          <tr><td style="color:var(--red);font-weight:700">합성(Composition)</td><td class="mono" style="color:var(--red)">◆────</td><td>부분이 독립 존재 불가</td><td>집◆─방</td></tr>
+          <tr><td>의존</td><td class="mono">- - -▶</td><td>일시적 사용</td><td>클라이언트→서비스</td></tr>
+          <tr><td>실체화</td><td class="mono">─ ─ ─▷</td><td>인터페이스 구현</td><td>클래스→인터페이스</td></tr>
+          <tr><td>일반화</td><td class="mono">────▷</td><td>상속 (IS-A)</td><td>강아지▷동물</td></tr>
+        </table>
+        <div class="trap-box">
+          <div class="trap-title">⚠ 함정 포인트</div>
+          <ul>
+            <li><strong>집합 vs 합성</strong>: 집합(◇)은 바퀴처럼 자동차 없이도 존재, 합성(◆)은 방처럼 집 없이는 존재 불가</li>
+            <li><strong>include vs extend</strong>: include=반드시 포함, extend=조건부 선택</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 디자인 패턴 -->
+  <div class="card purple" id="p1-pattern">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🧩</span>1-2 GoF 디자인 패턴 23종</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+
+    <div class="pattern-grid">
+      <!-- 생성 -->
+      <div style="grid-column:1/-1;padding:4px 0 6px"><span class="tag tag-purple" style="font-size:12px;padding:4px 12px">🏭 생성(Creational) 패턴</span></div>
+      <div class="pattern-card" style="background:#faf5ff;border-color:#ddd6fe">
+        <div class="pattern-card-name" style="color:var(--purple)">Singleton ★★★</div>
+        <div class="pattern-card-desc">인스턴스 1개만 생성<br>private 생성자 + static 메서드</div>
+        <div class="pattern-card-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#faf5ff;border-color:#ddd6fe">
+        <div class="pattern-card-name" style="color:var(--purple)">Factory Method ★★★</div>
+        <div class="pattern-card-desc">객체 생성을 서브클래스에 위임<br>"어떤 클래스를 만들지"</div>
+        <div class="pattern-card-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#faf5ff;border-color:#ddd6fe">
+        <div class="pattern-card-name" style="color:var(--purple)">Abstract Factory</div>
+        <div class="pattern-card-desc">관련 객체군을 인터페이스로 생성</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#faf5ff;border-color:#ddd6fe">
+        <div class="pattern-card-name" style="color:var(--purple)">Builder</div>
+        <div class="pattern-card-desc">복잡한 객체를 단계별 생성</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#faf5ff;border-color:#ddd6fe">
+        <div class="pattern-card-name" style="color:var(--purple)">Prototype</div>
+        <div class="pattern-card-desc">기존 객체를 복사하여 생성</div>
+        <div class="pattern-card-freq"><span class="star">★</span><span class="star off">★★</span></div>
+      </div>
+      <!-- 구조 -->
+      <div style="grid-column:1/-1;padding:10px 0 6px"><span class="tag tag-blue" style="font-size:12px;padding:4px 12px">🏗 구조(Structural) 패턴</span></div>
+      <div class="pattern-card" style="background:#eff6ff;border-color:#bfdbfe">
+        <div class="pattern-card-name" style="color:var(--blue)">Adapter ★★★</div>
+        <div class="pattern-card-desc">인터페이스 변환 (Wrapper)<br>호환되지 않는 클래스 연결</div>
+        <div class="pattern-card-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#eff6ff;border-color:#bfdbfe">
+        <div class="pattern-card-name" style="color:var(--blue)">Decorator</div>
+        <div class="pattern-card-desc">객체에 기능을 동적으로 추가</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#eff6ff;border-color:#bfdbfe">
+        <div class="pattern-card-name" style="color:var(--blue)">Facade</div>
+        <div class="pattern-card-desc">복잡한 서브시스템에 단순 인터페이스</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#eff6ff;border-color:#bfdbfe">
+        <div class="pattern-card-name" style="color:var(--blue)">Proxy</div>
+        <div class="pattern-card-desc">대리 객체로 접근 제어</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <!-- 행위 -->
+      <div style="grid-column:1/-1;padding:10px 0 6px"><span class="tag tag-teal" style="font-size:12px;padding:4px 12px">🎭 행위(Behavioral) 패턴</span></div>
+      <div class="pattern-card" style="background:#f0fdfa;border-color:#99f6e4">
+        <div class="pattern-card-name" style="color:var(--teal)">Observer ★★★</div>
+        <div class="pattern-card-desc">상태 변화 시 관련 객체에 자동 통보<br>Publish-Subscribe 구조</div>
+        <div class="pattern-card-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#f0fdfa;border-color:#99f6e4">
+        <div class="pattern-card-name" style="color:var(--teal)">Strategy ★★★</div>
+        <div class="pattern-card-desc">알고리즘을 캡슐화하여 교체 가능</div>
+        <div class="pattern-card-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#f0fdfa;border-color:#99f6e4">
+        <div class="pattern-card-name" style="color:var(--teal)">Command</div>
+        <div class="pattern-card-desc">요청을 객체로 캡슐화<br>Undo/Redo 가능</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#f0fdfa;border-color:#99f6e4">
+        <div class="pattern-card-name" style="color:var(--teal)">Template Method</div>
+        <div class="pattern-card-desc">알고리즘 골격 정의, 세부는 서브클래스</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#f0fdfa;border-color:#99f6e4">
+        <div class="pattern-card-name" style="color:var(--teal)">Iterator</div>
+        <div class="pattern-card-desc">컬렉션 순회 인터페이스 제공</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+      <div class="pattern-card" style="background:#f0fdfa;border-color:#99f6e4">
+        <div class="pattern-card-name" style="color:var(--teal)">State</div>
+        <div class="pattern-card-desc">상태에 따라 행동 변경</div>
+        <div class="pattern-card-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+    </div>
+
+    <div class="trap-box">
+      <div class="trap-title">⚠ 함정 포인트</div>
+      <ul>
+        <li><strong>Singleton</strong>: "생성자를 <span style="color:var(--red)">private</span>으로 선언"이 핵심 — static getInstance() 메서드로 반환</li>
+        <li><strong>Factory Method</strong>: "어떤 클래스를 인스턴스화할지 <span style="color:var(--red)">서브클래스가 결정</span>"</li>
+        <li><strong>Observer</strong>: Publish-Subscribe와 유사하지만 동일하지 않음</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 요구사항 -->
+  <div class="card teal" id="p1-req">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">📋</span>1-3 요구사항 분석</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="memo-box">
+      <div class="memo-title">📝 요구사항 개발 프로세스 순서 (필수 암기!)</div>
+      <div class="flow" style="margin-top:8px">
+        <div class="flow-step highlight">① 도출<br><span style="font-size:10px;opacity:.8">Elicitation</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">② 분석<br><span style="font-size:10px;opacity:.8">Analysis</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step amber">③ 명세<br><span style="font-size:10px;opacity:.8">Specification</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step green">④ 확인<br><span style="font-size:10px;opacity:.8">Validation</span></div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:16px">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">기능 vs 비기능 요구사항</p>
+        <table class="vtable">
+          <tr><th>구분</th><th>기능 요구사항</th><th>비기능 요구사항</th></tr>
+          <tr><td>정의</td><td>무엇을 해야 하는가</td><td>어떻게 동작해야 하는가</td></tr>
+          <tr><td>예시</td><td>로그인, 검색, 결제</td><td>성능, 보안, 가용성</td></tr>
+          <tr><td>표현</td><td>유스케이스</td><td>SLA, 응답시간</td></tr>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">요구사항 확인(검토) 기법</p>
+        <table class="vtable">
+          <tr><th>기법</th><th>설명</th></tr>
+          <tr><td><span class="tag tag-blue">인스펙션</span></td><td>공식적 검토 (역할 분리), 가장 엄격</td></tr>
+          <tr><td><span class="tag tag-green">워크스루</span></td><td>비공식 검토, 저작자가 주도</td></tr>
+          <tr><td><span class="tag tag-amber">동료 검토</span></td><td>작성자가 다른 개발자에게 설명</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content-wrap -->
+
+<!-- ════════ PART 02 ════════ -->
+<div class="part-header" id="part02">
+  <span class="part-num">PART 02</span>
+  <h2 class="part-title" style="color:var(--teal)">소프트웨어 개발</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+<div class="content-wrap" style="padding-top:24px">
+
+  <!-- 자료구조 -->
+  <div class="card teal" id="p2-ds">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🗂</span>2-1 자료구조</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">스택(Stack) vs 큐(Queue)</p>
+        <div class="vs-wrap">
+          <div class="vs-col">
+            <div class="vs-label blue">📚 스택 (Stack)</div>
+            <div class="vs-item"><strong>LIFO</strong> — Last In First Out</div>
+            <div class="vs-item">삽입/삭제: <strong>push/pop</strong> (같은 쪽 Top)</div>
+            <div class="vs-item">활용: 함수호출, 역순처리, <strong>DFS</strong></div>
+          </div>
+          <div class="vs-col">
+            <div class="vs-label orange">🎡 큐 (Queue)</div>
+            <div class="vs-item"><strong>FIFO</strong> — First In First Out</div>
+            <div class="vs-item">삽입: Rear / 삭제: Front</div>
+            <div class="vs-item">활용: 작업대기열, <strong>BFS</strong>, 프린터</div>
+          </div>
+        </div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin:14px 0 8px">트리(Tree) 주요 용어</p>
+        <table class="vtable">
+          <tr><th>용어</th><th>설명</th></tr>
+          <tr><td>루트(Root)</td><td>최상위 노드, 부모 없음</td></tr>
+          <tr><td>리프(Leaf)</td><td>자식이 없는 노드 (단말 노드)</td></tr>
+          <tr><td>차수(Degree)</td><td>노드의 자식 수</td></tr>
+          <tr><td>깊이(Depth)</td><td>루트에서 해당 노드까지 간선 수</td></tr>
+          <tr><td>높이(Height)</td><td>루트에서 가장 깊은 리프까지</td></tr>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">이진트리 순회 (★★★ 가장 많이 출제!)</p>
+
+        <!-- SVG 트리 -->
+        <div class="tree-viz">
+          <div class="tree-svg-wrap">
+            <svg width="240" height="140" viewBox="0 0 240 140">
+              <line x1="120" y1="28" x2="72" y2="72" stroke="#94a3b8" stroke-width="2"/>
+              <line x1="120" y1="28" x2="168" y2="72" stroke="#94a3b8" stroke-width="2"/>
+              <line x1="72" y1="72" x2="44" y2="116" stroke="#94a3b8" stroke-width="2"/>
+              <line x1="72" y1="72" x2="100" y2="116" stroke="#94a3b8" stroke-width="2"/>
+              <line x1="168" y1="72" x2="140" y2="116" stroke="#94a3b8" stroke-width="2"/>
+              <line x1="168" y1="72" x2="196" y2="116" stroke="#94a3b8" stroke-width="2"/>
+              <circle cx="120" cy="24" r="20" fill="#1a56db"/>
+              <circle cx="72"  cy="68" r="20" fill="#0d9488"/>
+              <circle cx="168" cy="68" r="20" fill="#0d9488"/>
+              <circle cx="44"  cy="112" r="20" fill="#d97706"/>
+              <circle cx="100" cy="112" r="20" fill="#d97706"/>
+              <circle cx="140" cy="112" r="20" fill="#d97706"/>
+              <circle cx="196" cy="112" r="20" fill="#d97706"/>
+              <text x="120" y="29" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="bold" font-family="JetBrains Mono">A</text>
+              <text x="72"  y="73" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="bold" font-family="JetBrains Mono">B</text>
+              <text x="168" y="73" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="bold" font-family="JetBrains Mono">C</text>
+              <text x="44"  y="117" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="13" font-weight="bold" font-family="JetBrains Mono">D</text>
+              <text x="100" y="117" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="13" font-weight="bold" font-family="JetBrains Mono">E</text>
+              <text x="140" y="117" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="13" font-weight="bold" font-family="JetBrains Mono">F</text>
+              <text x="196" y="117" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="13" font-weight="bold" font-family="JetBrains Mono">G</text>
+            </svg>
+          </div>
+          <div class="traversal-row">
+            <div class="traversal-label" style="color:var(--blue)">전위(Pre)<br><small style="color:var(--muted)">루→왼→오</small></div>
+            <div class="traversal-steps">
+              <div class="traversal-step" style="background:#1a56db">A</div>
+              <div class="traversal-step" style="background:#0d9488">B</div>
+              <div class="traversal-step" style="background:#d97706">D</div>
+              <div class="traversal-step" style="background:#d97706">E</div>
+              <div class="traversal-step" style="background:#0d9488">C</div>
+              <div class="traversal-step" style="background:#d97706">F</div>
+              <div class="traversal-step" style="background:#d97706">G</div>
+            </div>
+          </div>
+          <div class="traversal-row">
+            <div class="traversal-label" style="color:var(--teal)">중위(In)<br><small style="color:var(--muted)">왼→루→오</small></div>
+            <div class="traversal-steps">
+              <div class="traversal-step" style="background:#d97706">D</div>
+              <div class="traversal-step" style="background:#0d9488">B</div>
+              <div class="traversal-step" style="background:#d97706">E</div>
+              <div class="traversal-step" style="background:#1a56db">A</div>
+              <div class="traversal-step" style="background:#d97706">F</div>
+              <div class="traversal-step" style="background:#0d9488">C</div>
+              <div class="traversal-step" style="background:#d97706">G</div>
+            </div>
+          </div>
+          <div class="traversal-row">
+            <div class="traversal-label" style="color:var(--amber)">후위(Post)<br><small style="color:var(--muted)">왼→오→루</small></div>
+            <div class="traversal-steps">
+              <div class="traversal-step" style="background:#d97706">D</div>
+              <div class="traversal-step" style="background:#d97706">E</div>
+              <div class="traversal-step" style="background:#0d9488">B</div>
+              <div class="traversal-step" style="background:#d97706">F</div>
+              <div class="traversal-step" style="background:#d97706">G</div>
+              <div class="traversal-step" style="background:#0d9488">C</div>
+              <div class="traversal-step" style="background:#1a56db">A</div>
+            </div>
+          </div>
+        </div>
+        <div class="trap-box">
+          <div class="trap-title">⚠ 함정 포인트</div>
+          <ul>
+            <li><strong>후위순회</strong> = 역폴란드 표기법(RPN) 변환 시 사용!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 정렬 알고리즘 -->
+  <div class="card green" id="p2-sort">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">📊</span>2-2 정렬 알고리즘</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table class="vtable">
+          <tr><th>정렬</th><th>평균</th><th>최악</th><th>안정?</th><th>빈출</th></tr>
+          <tr><td>버블(Bubble)</td><td class="mono" style="color:var(--red)">O(n²)</td><td class="mono" style="color:var(--red)">O(n²)</td><td><span class="tag tag-green">O</span></td><td><span class="star">★★★</span></td></tr>
+          <tr><td>선택(Selection)</td><td class="mono" style="color:var(--red)">O(n²)</td><td class="mono" style="color:var(--red)">O(n²)</td><td><span class="tag tag-red">X</span></td><td><span class="star">★★★</span></td></tr>
+          <tr><td>삽입(Insertion)</td><td class="mono" style="color:var(--red)">O(n²)</td><td class="mono" style="color:var(--red)">O(n²)</td><td><span class="tag tag-green">O</span></td><td><span class="star">★★★</span></td></tr>
+          <tr><td><b>퀵(Quick)</b></td><td class="mono" style="color:var(--green)">O(n log n)</td><td class="mono" style="color:var(--red)">O(n²)</td><td><span class="tag tag-red">X</span></td><td><span class="star">★★★</span></td></tr>
+          <tr><td><b>합병(Merge)</b></td><td class="mono" style="color:var(--green)">O(n log n)</td><td class="mono" style="color:var(--green)">O(n log n)</td><td><span class="tag tag-green">O</span></td><td><span class="star">★★★</span></td></tr>
+          <tr><td><b>힙(Heap)</b></td><td class="mono" style="color:var(--green)">O(n log n)</td><td class="mono" style="color:var(--green)">O(n log n)</td><td><span class="tag tag-red">X</span></td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+          <tr><td>기수(Radix)</td><td class="mono" style="color:var(--blue)">O(kn)</td><td class="mono" style="color:var(--blue)">O(kn)</td><td><span class="tag tag-green">O</span></td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px">시간복잡도 시각화</p>
+        <div class="complexity-bars">
+          <div class="cbar">
+            <div class="cbar-label" style="color:var(--red)">O(n²)</div>
+            <div class="cbar-track"><div class="cbar-fill" style="width:85%;background:linear-gradient(90deg,#dc2626,#f87171)"><span>버블 · 선택 · 삽입</span></div></div>
+          </div>
+          <div class="cbar">
+            <div class="cbar-label" style="color:var(--green)">O(n log n)</div>
+            <div class="cbar-track"><div class="cbar-fill" style="width:52%;background:linear-gradient(90deg,#16a34a,#4ade80)"><span>퀵 · 합병 · 힙</span></div></div>
+          </div>
+          <div class="cbar">
+            <div class="cbar-label" style="color:var(--blue)">O(kn)</div>
+            <div class="cbar-track"><div class="cbar-fill" style="width:38%;background:linear-gradient(90deg,#1a56db,#60a5fa)"><span>기수 정렬</span></div></div>
+          </div>
+          <div class="cbar">
+            <div class="cbar-label" style="color:var(--teal)">O(n)</div>
+            <div class="cbar-track"><div class="cbar-fill" style="width:20%;background:linear-gradient(90deg,#0d9488,#2dd4bf)"><span>삽입 최선</span></div></div>
+          </div>
+        </div>
+        <div class="memo-box" style="margin-top:14px">
+          <div class="memo-title">📝 안정/불안정 정렬 암기</div>
+          <ul>
+            <li><strong>안정 정렬</strong> (버삽합): <span class="hl-green">버</span>블 · <span class="hl-green">삽</span>입 · <span class="hl-green">합</span>병</li>
+            <li><strong>불안정 정렬</strong>: 퀵 · 힙 · 선택</li>
+            <li><strong>퀵 정렬 최악</strong>: 이미 정렬된 경우 O(n²)</li>
+            <li><strong>합병 정렬</strong>: 외부 정렬에 적합 (보조 메모리 필요)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 소프트웨어 테스트 -->
+  <div class="card amber" id="p2-test">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🧪</span>2-3 소프트웨어 테스트</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="vs-wrap">
+          <div class="vs-col">
+            <div class="vs-label blue">화이트박스 테스트</div>
+            <div class="vs-item"><strong>내부 구조(코드)</strong> 기반</div>
+            <div class="vs-item">개발자가 수행</div>
+            <div class="vs-item">단위 테스트에 주로 활용</div>
+            <div class="vs-item" style="margin-top:6px;font-weight:700">기법:</div>
+            <div class="vs-item">구문/결정/조건/경로 커버리지</div>
+          </div>
+          <div class="vs-col">
+            <div class="vs-label orange">블랙박스 테스트</div>
+            <div class="vs-item"><strong>기능 명세(외부)</strong> 기반</div>
+            <div class="vs-item">테스터가 수행</div>
+            <div class="vs-item">시스템 테스트에 활용</div>
+            <div class="vs-item" style="margin-top:6px;font-weight:700">기법:</div>
+            <div class="vs-item">동치분할, <strong>경계값 분석</strong></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">테스트 단계 (V-모델)</p>
+        <div class="flow" style="flex-direction:column;gap:3px">
+          <div style="display:flex;gap:8px;align-items:center">
+            <div class="flow-step" style="background:var(--blue);min-width:120px;text-align:center">단위 테스트</div>
+            <span style="font-size:12px;color:var(--muted)">개별 모듈/함수 (화이트박스)</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div class="flow-step" style="background:var(--teal);min-width:120px;text-align:center">통합 테스트</div>
+            <span style="font-size:12px;color:var(--muted)">모듈 간 인터페이스 (스텁/드라이버)</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div class="flow-step" style="background:var(--amber);min-width:120px;text-align:center">시스템 테스트</div>
+            <span style="font-size:12px;color:var(--muted)">전체 기능/성능</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div class="flow-step" style="background:var(--green);min-width:120px;text-align:center">인수 테스트</div>
+            <span style="font-size:12px;color:var(--muted)">알파(개발사) / 베타(사용자)</span>
+          </div>
+        </div>
+        <div class="trap-box">
+          <div class="trap-title">⚠ 함정 포인트</div>
+          <ul>
+            <li><strong>하향식 통합</strong>: <span style="color:var(--red)">스텁(Stub)</span> 필요 (하위 모듈 대체)</li>
+            <li><strong>상향식 통합</strong>: <span style="color:var(--red)">드라이버(Driver)</span> 필요 (상위 모듈 대체)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ PART 03 ════════ -->
+<div class="part-header" id="part03">
+  <span class="part-num">PART 03</span>
+  <h2 class="part-title" style="color:var(--purple)">데이터베이스 활용</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+<div class="content-wrap" style="padding-top:24px">
+
+  <!-- SQL -->
+  <div class="card purple" id="p3-sql">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🗄</span>3-1 SQL (가장 많이 출제!)</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table class="vtable">
+          <tr><th>분류</th><th>명령어</th><th>설명</th><th>빈출</th></tr>
+          <tr><td rowspan="4" style="background:#f5f3ff;font-weight:700;color:var(--purple)">DDL</td><td class="mono">CREATE</td><td>테이블/뷰 생성</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">ALTER</td><td>구조 변경</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">DROP</td><td>삭제 (복구 불가)</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">TRUNCATE</td><td>전체 데이터 삭제</td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+          <tr><td rowspan="4" style="background:#eff6ff;font-weight:700;color:var(--blue)">DML</td><td class="mono">SELECT</td><td>데이터 조회</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">INSERT</td><td>데이터 삽입</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">UPDATE</td><td>데이터 수정</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">DELETE</td><td>조건부 삭제</td><td><span class="star">★★★</span></td></tr>
+          <tr><td style="background:#f0fdf4;font-weight:700;color:var(--green)">DCL</td><td class="mono">GRANT/REVOKE</td><td>권한 부여/취소</td><td><span class="star">★★★</span></td></tr>
+          <tr><td rowspan="3" style="background:#fef9ee;font-weight:700;color:var(--amber)">TCL</td><td class="mono">COMMIT</td><td>영구 반영</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">ROLLBACK</td><td>취소/되돌리기</td><td><span class="star">★★★</span></td></tr>
+          <tr><td class="mono">SAVEPOINT</td><td>부분 롤백 지점</td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="memo-box">
+          <div class="memo-title">📝 SELECT 처리 순서 (필수 암기!)</div>
+          <p style="font-size:11px;color:var(--blue);margin-bottom:8px">작성 순서 ≠ 처리 순서!</p>
+          <div class="flow" style="gap:3px">
+            <div class="flow-step" style="background:#475569;padding:6px 10px;font-size:11px">FROM</div>
+            <div class="flow-arrow" style="font-size:12px">→</div>
+            <div class="flow-step" style="background:#475569;padding:6px 10px;font-size:11px">WHERE</div>
+            <div class="flow-arrow" style="font-size:12px">→</div>
+            <div class="flow-step" style="background:var(--purple);padding:6px 10px;font-size:11px">GROUP BY</div>
+            <div class="flow-arrow" style="font-size:12px">→</div>
+            <div class="flow-step" style="background:var(--purple);padding:6px 10px;font-size:11px">HAVING</div>
+            <div class="flow-arrow" style="font-size:12px">→</div>
+            <div class="flow-step" style="background:var(--blue);padding:6px 10px;font-size:11px">SELECT</div>
+            <div class="flow-arrow" style="font-size:12px">→</div>
+            <div class="flow-step" style="background:#475569;padding:6px 10px;font-size:11px">ORDER BY</div>
+          </div>
+          <ul style="margin-top:10px;padding-left:18px">
+            <li style="font-size:12px;color:var(--blue)"><strong>WHERE</strong>: 그룹화 전 조건 (집계함수 불가)</li>
+            <li style="font-size:12px;color:var(--blue)"><strong>HAVING</strong>: 그룹화 후 조건 (집계함수 가능)</li>
+          </ul>
+        </div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin:14px 0 8px">JOIN 종류</p>
+        <table class="vtable">
+          <tr><th>JOIN</th><th>결과</th></tr>
+          <tr><td><span class="tag tag-blue">INNER JOIN</span></td><td>교집합 (일치하는 행만)</td></tr>
+          <tr><td><span class="tag tag-green">LEFT OUTER</span></td><td>왼쪽 전체 + 불일치는 NULL</td></tr>
+          <tr><td><span class="tag tag-amber">RIGHT OUTER</span></td><td>오른쪽 전체 + 불일치는 NULL</td></tr>
+          <tr><td><span class="tag tag-purple">FULL OUTER</span></td><td>합집합 (불일치는 NULL)</td></tr>
+          <tr><td><span class="tag tag-gray">CROSS JOIN</span></td><td>카티션 곱 (행수 × 행수)</td></tr>
+        </table>
+        <div class="trap-box">
+          <div class="trap-title">⚠ 핵심 함정</div>
+          <ul>
+            <li><strong>DDL</strong>(CREATE/ALTER/DROP/TRUNCATE) = <span style="color:var(--red)">AUTO COMMIT</span> → ROLLBACK 불가!</li>
+            <li><strong>COUNT(*)</strong> = NULL 포함 / <strong>COUNT(컬럼)</strong> = NULL 제외</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 정규화 -->
+  <div class="card navy" id="p3-norm">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🔧</span>3-2 정규화 (Normalization)</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="norm-steps">
+      <div class="norm-step">
+        <div class="norm-step-badge" style="background:#94a3b8">UNF</div>
+        <div class="norm-step-text"><div class="norm-step-cond">비정규형</div><div class="norm-step-desc">반복 그룹 존재</div></div>
+        <div class="norm-step-freq"><span class="star off">★★★</span></div>
+      </div>
+      <div class="norm-step">
+        <div class="norm-step-badge" style="background:var(--blue)">1NF</div>
+        <div class="norm-step-text"><div class="norm-step-cond">모든 속성이 원자값(더 이상 분리 불가)</div><div class="norm-step-desc">반복 그룹 제거</div></div>
+        <div class="norm-step-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="norm-step" style="background:#eff6ff">
+        <div class="norm-step-badge" style="background:var(--sky)">2NF</div>
+        <div class="norm-step-text"><div class="norm-step-cond">1NF + <span class="hl-red">부분 함수 종속 제거</span></div><div class="norm-step-desc">기본키 전체에 완전 함수 종속이어야 함</div></div>
+        <div class="norm-step-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="norm-step" style="background:#f0fdf4">
+        <div class="norm-step-badge" style="background:var(--green)">3NF</div>
+        <div class="norm-step-text"><div class="norm-step-cond">2NF + <span class="hl-red">이행적 함수 종속 제거</span></div><div class="norm-step-desc">A→B→C 이행 종속 제거</div></div>
+        <div class="norm-step-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="norm-step" style="background:#fef9ee">
+        <div class="norm-step-badge" style="background:var(--amber)">BCNF</div>
+        <div class="norm-step-text"><div class="norm-step-cond">3NF + <span class="hl-red">모든 결정자가 후보키</span></div><div class="norm-step-desc">3NF보다 강한 정규형</div></div>
+        <div class="norm-step-freq"><span class="star">★★★</span></div>
+      </div>
+      <div class="norm-step">
+        <div class="norm-step-badge" style="background:var(--purple)">4NF</div>
+        <div class="norm-step-text"><div class="norm-step-cond">BCNF + 다치 종속 제거</div><div class="norm-step-desc"></div></div>
+        <div class="norm-step-freq"><span class="star">★★</span><span class="star off">★</span></div>
+      </div>
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠ 함정 포인트</div>
+      <ul>
+        <li><strong>기본키가 단일 컬럼</strong>이면 → 자동으로 <span style="color:var(--red)">2NF 만족</span> (부분 종속 발생 불가)</li>
+        <li><strong>BCNF ≠ 3NF 자동 만족</strong>: 3NF를 만족해도 BCNF를 만족하지 않을 수 있음</li>
+        <li><strong>역정규화</strong>: JOIN 감소 목적으로 정규화를 일부러 되돌리는 것</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 트랜잭션 -->
+  <div class="card red" id="p3-tx">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">⚙️</span>3-3 트랜잭션 & 동시성 제어</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="acid-grid">
+      <div class="acid-card" style="background:#fef2f2;border-color:#fecaca">
+        <div class="acid-letter" style="color:var(--red)">A</div>
+        <div class="acid-name">원자성</div>
+        <div class="acid-eng">Atomicity</div>
+        <div class="acid-desc">All or Nothing<br>완전 실행 또는 완전 취소</div>
+      </div>
+      <div class="acid-card" style="background:#eff6ff;border-color:#bfdbfe">
+        <div class="acid-letter" style="color:var(--blue)">C</div>
+        <div class="acid-name">일관성</div>
+        <div class="acid-eng">Consistency</div>
+        <div class="acid-desc">트랜잭션 전후<br>일관된 상태 유지</div>
+      </div>
+      <div class="acid-card" style="background:#f0fdf4;border-color:#bbf7d0">
+        <div class="acid-letter" style="color:var(--green)">I</div>
+        <div class="acid-name">격리성</div>
+        <div class="acid-eng">Isolation</div>
+        <div class="acid-desc">동시 실행 트랜잭션<br>간 간섭 없음</div>
+      </div>
+      <div class="acid-card" style="background:#faf5ff;border-color:#ddd6fe">
+        <div class="acid-letter" style="color:var(--purple)">D</div>
+        <div class="acid-name">지속성</div>
+        <div class="acid-eng">Durability</div>
+        <div class="acid-desc">완료된 결과<br>영구 보존</div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:16px">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">락(Lock) 비교</p>
+        <div class="vs-wrap">
+          <div class="vs-col">
+            <div class="vs-label blue">공유 락 (S-Lock)</div>
+            <div class="vs-item">읽기 허용 (SELECT)</div>
+            <div class="vs-item">다른 공유락: <strong>허용</strong></div>
+            <div class="vs-item">다른 배타락: 불허</div>
+          </div>
+          <div class="vs-col">
+            <div class="vs-label orange">배타 락 (X-Lock)</div>
+            <div class="vs-item">읽기/쓰기 모두 점유</div>
+            <div class="vs-item">다른 공유락: <strong>불허</strong></div>
+            <div class="vs-item">다른 배타락: 불허</div>
+          </div>
+        </div>
+      </div>
+      <div class="trap-box" style="margin-top:0">
+        <div class="trap-title">⚠ 교착상태(DeadLock) 발생 조건 4가지</div>
+        <ul>
+          <li><strong>①</strong> 상호 배제 (Mutual Exclusion)</li>
+          <li><strong>②</strong> 점유와 대기 (Hold and Wait)</li>
+          <li><strong>③</strong> 비선점 (Non-preemption)</li>
+          <li><strong>④</strong> 환형 대기 (Circular Wait)</li>
+        </ul>
+        <p style="font-size:11px;color:#7f1d1d;margin-top:6px">해결: 예방 / 회피(은행원 알고리즘) / 탐지 / 회복</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ PART 04 ════════ -->
+<div class="part-header" id="part04">
+  <span class="part-num">PART 04</span>
+  <h2 class="part-title" style="color:var(--orange)">프로그래밍 언어</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+<div class="content-wrap" style="padding-top:24px">
+
+  <!-- C언어 -->
+  <div class="card amber" id="p4-c">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">💻</span>4-1 C언어 핵심</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">포인터 핵심</p>
+        <div class="code-block"><code><span class="kw">int</span> a = <span class="num">10</span>;
+<span class="kw">int</span> *p = <span class="fn">&</span>a;  <span class="cm">// p에 a의 주소 저장</span>
+
+<span class="fn">*</span>p = <span class="num">20</span>;   <span class="cm">// 역참조: a의 값을 20으로 변경</span>
+p + <span class="num">1</span>        <span class="cm">// 주소 + sizeof(int) = +4바이트</span>
+
+<span class="cm">// 배열과 포인터</span>
+<span class="kw">int</span> arr[<span class="num">5</span>];
+arr == <span class="fn">&</span>arr[<span class="num">0</span>]    <span class="cm">// 배열명 = 첫 원소의 주소</span>
+arr[i] == <span class="fn">*</span>(arr+i) <span class="cm">// 동일!</span></code></div>
+        <div class="trap-box">
+          <div class="trap-title">⚠ C언어 함정</div>
+          <ul>
+            <li><strong>전위++ vs 후위++</strong>: <span class="hl-red">a = b++</span>는 대입 후 증가 / <span class="hl-blue">a = ++b</span>는 증가 후 대입</li>
+            <li><strong>sizeof("abc") = 4</strong> (널문자 포함) / strlen("abc") = 3</li>
+            <li><strong>문자열 비교</strong>: str1 == str2는 <span class="hl-red">주소 비교</span>! → <span class="hl-green">strcmp()</span> 사용!</li>
+            <li><strong>정수 나눗셈</strong>: 5/2 = 2 (소수 버림)</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">자주 나오는 코드 추적</p>
+        <div class="code-block"><code><span class="cm">// Q: 출력 결과는?</span>
+<span class="kw">int</span> a = <span class="num">5</span>;
+<span class="kw">int</span> b = a++;       <span class="cm">// b=5, a=6 (후위)</span>
+<span class="fn">printf</span>(<span class="str">"%d %d"</span>, a, b); <span class="cm">// 6 5</span>
+
+<span class="cm">// Q: 출력 결과는?</span>
+<span class="kw">int</span> arr[] = {<span class="num">10</span>,<span class="num">20</span>,<span class="num">30</span>,<span class="num">40</span>,<span class="num">50</span>};
+<span class="fn">printf</span>(<span class="str">"%d"</span>, <span class="fn">*</span>(arr + <span class="num">3</span>)); <span class="cm">// 40</span>
+
+<span class="cm">// Q: sizeof 결과는?</span>
+<span class="fn">sizeof</span>(<span class="str">"Hello"</span>)  <span class="cm">// 6 (H,e,l,l,o,\0)</span>
+<span class="fn">strlen</span>(<span class="str">"Hello"</span>)  <span class="cm">// 5 (\0 미포함)</span></code></div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin:14px 0 8px">데이터 타입 크기</p>
+        <table class="vtable">
+          <tr><th>타입</th><th>크기</th><th>형식</th></tr>
+          <tr><td class="mono">char</td><td>1 byte</td><td class="mono">%c, %d</td></tr>
+          <tr><td class="mono">int</td><td>4 byte</td><td class="mono">%d</td></tr>
+          <tr><td class="mono">float</td><td>4 byte</td><td class="mono">%f</td></tr>
+          <tr><td class="mono">double</td><td>8 byte</td><td class="mono">%lf</td></tr>
+          <tr><td class="mono">pointer</td><td>4 byte(32bit)</td><td class="mono">%p</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Java -->
+  <div class="card blue" id="p4-java">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">☕</span>4-2 Java 핵심</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">OOP 4대 특성</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--blue)">캡슐화</div>
+            <div style="font-size:11px;color:var(--slate);margin-top:4px">데이터+메서드 묶음<br>내부를 숨김 (private)</div>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--green)">상속</div>
+            <div style="font-size:11px;color:var(--slate);margin-top:4px">부모 속성/메서드 재사용<br>extends, super</div>
+          </div>
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:10px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--amber)">다형성</div>
+            <div style="font-size:11px;color:var(--slate);margin-top:4px">같은 이름, 다른 동작<br>오버로딩/오버라이딩</div>
+          </div>
+          <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:10px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--purple)">추상화</div>
+            <div style="font-size:11px;color:var(--slate);margin-top:4px">공통 속성 추출<br>abstract, interface</div>
+          </div>
+        </div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin:14px 0 8px">오버로딩 vs 오버라이딩</p>
+        <table class="vtable">
+          <tr><th>구분</th><th>오버로딩</th><th>오버라이딩</th></tr>
+          <tr><td>관계</td><td>같은 클래스</td><td>부모→자식</td></tr>
+          <tr><td>메서드명</td><td>동일</td><td>동일</td></tr>
+          <tr><td>매개변수</td><td style="color:var(--red);font-weight:700">다름</td><td style="color:var(--blue);font-weight:700">동일</td></tr>
+          <tr><td>바인딩</td><td>컴파일 타임</td><td>런타임</td></tr>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">자주 나오는 코드 추적</p>
+        <div class="code-block"><code><span class="cm">// Q: 출력 결과는?</span>
+<span class="kw">int</span>[] a = {<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>};
+<span class="fn">System.out.println</span>(a.length); <span class="cm">// 5</span>
+
+<span class="cm">// Q: true/false?</span>
+<span class="kw">String</span> s1 = <span class="str">"hello"</span>;
+<span class="kw">String</span> s2 = <span class="str">"hello"</span>;
+s1 == s2          <span class="cm">// true  (String Pool 공유)</span>
+<span class="kw">new</span> <span class="fn">String</span>(<span class="str">"hi"</span>) == <span class="str">"hi"</span> <span class="cm">// false (힙 별도)</span>
+
+<span class="cm">// Q: 출력 결과는?</span>
+<span class="kw">String</span> s = <span class="str">"Hello World"</span>;
+s.<span class="fn">substring</span>(<span class="num">6</span>);  <span class="cm">// "World"</span></code></div>
+        <div class="trap-box">
+          <div class="trap-title">⚠ Java 함정</div>
+          <ul>
+            <li><strong>String 비교</strong>: == 는 주소 비교 → <span class="hl-green">equals()</span> 사용!</li>
+            <li><strong>interface</strong>: 다중 구현(implements) 가능</li>
+            <li><strong>abstract class</strong>: 단일 상속(extends)만 가능</li>
+            <li><strong>static 메서드</strong>: 오버라이딩 불가 (숨김만 됨)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Python -->
+  <div class="card green" id="p4-py">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🐍</span>4-3 Python 핵심</div>
+      <span class="freq"><span class="star">★★</span><span class="star off">★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table class="vtable">
+          <tr><th>구조</th><th>문법</th><th>특징</th></tr>
+          <tr><td><span class="tag tag-blue">리스트</span></td><td class="mono">[1,2,3]</td><td>변경 가능(Mutable), 중복 허용</td></tr>
+          <tr><td><span class="tag tag-amber">튜플</span></td><td class="mono">(1,2,3)</td><td>변경 불가(Immutable), 중복 허용</td></tr>
+          <tr><td><span class="tag tag-green">딕셔너리</span></td><td class="mono">{"k":"v"}</td><td>키 중복 불가, 값 중복 허용</td></tr>
+          <tr><td><span class="tag tag-purple">셋(Set)</span></td><td class="mono">{1,2,3}</td><td>중복 불가, 순서 없음</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="code-block"><code><span class="cm"># 슬라이싱: a[시작:끝:간격]</span>
+a = [<span class="num">0</span>,<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>]
+a[<span class="num">1</span>:<span class="num">5</span>:<span class="num">2</span>]   <span class="cm"># [1, 3]</span>
+a[::-<span class="num">1</span>]    <span class="cm"># [5,4,3,2,1,0] 역순</span>
+
+<span class="cm"># 리스트 컴프리헨션</span>
+[x**<span class="num">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="fn">range</span>(<span class="num">6</span>) <span class="kw">if</span> x%<span class="num">2</span>==<span class="num">0</span>]
+<span class="cm"># [0, 4, 16]</span>
+
+<span class="cm"># 람다 함수</span>
+f = <span class="kw">lambda</span> x: x * <span class="num">2</span>
+f(<span class="num">5</span>)  <span class="cm"># 10</span></code></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ PART 05 ════════ -->
+<div class="part-header" id="part05">
+  <span class="part-num">PART 05</span>
+  <h2 class="part-title" style="color:var(--red)">정보보안</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+<div class="content-wrap" style="padding-top:24px">
+
+  <div class="card red" id="p5-crypto">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🔐</span>5-1 암호화 알고리즘</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table class="vtable">
+          <tr><th>분류</th><th>알고리즘</th><th>특징</th><th>빈출</th></tr>
+          <tr><td rowspan="5" style="background:#fef9ee;font-weight:700;color:var(--amber)">대칭키<br>(비밀키)</td><td><b>AES ★</b></td><td>128/192/256bit, 현재 표준</td><td><span class="star">★★★</span></td></tr>
+          <tr><td>ARIA</td><td>한국 표준 블록 암호</td><td><span class="star">★★★</span></td></tr>
+          <tr><td>SEED</td><td>한국 표준, 128bit</td><td><span class="star">★★★</span></td></tr>
+          <tr><td>DES</td><td>56bit, 현재 취약</td><td><span class="star">★★★</span></td></tr>
+          <tr><td>3DES</td><td>DES 3번 반복</td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+          <tr><td rowspan="3" style="background:#eff6ff;font-weight:700;color:var(--blue)">비대칭키<br>(공개키)</td><td><b>RSA ★</b></td><td>소인수분해 기반</td><td><span class="star">★★★</span></td></tr>
+          <tr><td>ECC</td><td>타원곡선, 짧은 키로 동등 보안</td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+          <tr><td>DSA</td><td>전자서명 전용</td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+          <tr><td rowspan="3" style="background:#f0fdf4;font-weight:700;color:var(--green)">해시<br>(Hash)</td><td><b>SHA-256 ★</b></td><td>256bit, 현재 표준</td><td><span class="star">★★★</span></td></tr>
+          <tr><td>MD5</td><td>128bit, 현재 취약</td><td><span class="star">★★★</span></td></tr>
+          <tr><td>SHA-1</td><td>160bit, 현재 취약</td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px">암호화 방식 비교</p>
+        <div class="vs-wrap">
+          <div class="vs-col">
+            <div class="vs-label orange">대칭키 암호화</div>
+            <div class="vs-item">키 1개로 암호화+복호화</div>
+            <div class="vs-item">빠름 ✓</div>
+            <div class="vs-item">키 배송 문제 있음 ✗</div>
+            <div class="vs-item" style="margin-top:6px"><strong>AES, DES, ARIA, SEED</strong></div>
+          </div>
+          <div class="vs-col">
+            <div class="vs-label blue">비대칭키 암호화</div>
+            <div class="vs-item">공개키+개인키 쌍 사용</div>
+            <div class="vs-item">느림 ✗</div>
+            <div class="vs-item">키 배송 문제 없음 ✓</div>
+            <div class="vs-item" style="margin-top:6px"><strong>RSA, ECC, DSA</strong></div>
+          </div>
+        </div>
+        <div class="trap-box">
+          <div class="trap-title">⚠ 전자서명 함정 (자주 출제!)</div>
+          <ul>
+            <li>암호화: <span class="hl-blue">공개키</span>로 암호화 → <span class="hl-blue">개인키</span>로 복호화</li>
+            <li>전자서명: <span class="hl-red">개인키</span>로 서명 → <span class="hl-red">공개키</span>로 검증 (역순!)</li>
+          </ul>
+        </div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin:14px 0 8px">주요 보안 공격</p>
+        <table class="vtable">
+          <tr><th>공격명</th><th>설명</th><th>방어</th></tr>
+          <tr><td><span class="tag tag-red">SQL Injection</span></td><td>쿼리 조작으로 DB 탈취</td><td>PreparedStatement</td></tr>
+          <tr><td><span class="tag tag-red">XSS</span></td><td>악성 스크립트 삽입</td><td>입력 필터링·인코딩</td></tr>
+          <tr><td><span class="tag tag-red">CSRF</span></td><td>의도치 않은 요청 유도</td><td>CSRF 토큰</td></tr>
+          <tr><td><span class="tag tag-red">DDoS</span></td><td>서비스 마비 공격</td><td>IPS, 방화벽</td></tr>
+          <tr><td><span class="tag tag-amber">스니핑</span></td><td>패킷 도청</td><td>암호화(SSL/TLS)</td></tr>
+          <tr><td><span class="tag tag-amber">스푸핑</span></td><td>주소 위조</td><td>인증 강화</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ PART 06 ════════ -->
+<div class="part-header" id="part06">
+  <span class="part-num">PART 06</span>
+  <h2 class="part-title" style="color:var(--teal)">네트워크</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+<div class="content-wrap" style="padding-top:24px">
+
+  <div class="card teal" id="p6-osi">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🌐</span>6-1 OSI 7계층</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="osi-stack">
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#7c3aed">7</div>
+            <div class="osi-name" style="background:#7c3aed">응용 (Application)</div>
+            <div class="osi-detail" style="background:rgba(124,58,237,.85)">HTTP · FTP · SMTP · DNS</div>
+            <div class="osi-unit" style="background:rgba(124,58,237,.7)">메시지</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#6d28d9">6</div>
+            <div class="osi-name" style="background:#6d28d9">표현 (Presentation)</div>
+            <div class="osi-detail" style="background:rgba(109,40,217,.85)">SSL/TLS · JPEG · MPEG</div>
+            <div class="osi-unit" style="background:rgba(109,40,217,.7)">메시지</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#4338ca">5</div>
+            <div class="osi-name" style="background:#4338ca">세션 (Session)</div>
+            <div class="osi-detail" style="background:rgba(67,56,202,.85)">NetBIOS · RPC</div>
+            <div class="osi-unit" style="background:rgba(67,56,202,.7)">메시지</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#1a56db">4</div>
+            <div class="osi-name" style="background:#1a56db">전송 (Transport)</div>
+            <div class="osi-detail" style="background:rgba(26,86,219,.85)">TCP · UDP</div>
+            <div class="osi-unit" style="background:rgba(26,86,219,.7)">세그먼트</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#0d9488">3</div>
+            <div class="osi-name" style="background:#0d9488">네트워크 (Network)</div>
+            <div class="osi-detail" style="background:rgba(13,148,136,.85)">IP · ICMP · 라우터</div>
+            <div class="osi-unit" style="background:rgba(13,148,136,.7)">패킷</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#16a34a">2</div>
+            <div class="osi-name" style="background:#16a34a">데이터링크 (Data Link)</div>
+            <div class="osi-detail" style="background:rgba(22,163,74,.85)">Ethernet · MAC · 스위치</div>
+            <div class="osi-unit" style="background:rgba(22,163,74,.7)">프레임</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#d97706">1</div>
+            <div class="osi-name" style="background:#d97706">물리 (Physical)</div>
+            <div class="osi-detail" style="background:rgba(217,119,6,.85)">케이블 · 허브 · 리피터</div>
+            <div class="osi-unit" style="background:rgba(217,119,6,.7)">비트</div>
+          </div>
+        </div>
+        <div class="memo-box" style="margin-top:12px">
+          <div class="memo-title">📝 암기법</div>
+          <ul>
+            <li>위→아래: <strong>아표세전네데물</strong></li>
+            <li>아래→위: <strong>물데네전세표아</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px" id="p6-tcp">TCP vs UDP 비교</p>
+        <div class="vs-wrap">
+          <div class="vs-col">
+            <div class="vs-label blue">TCP</div>
+            <div class="vs-item"><strong>연결 지향</strong> (3-way Handshake)</div>
+            <div class="vs-item">신뢰성 보장 (재전송, 순서보장)</div>
+            <div class="vs-item">흐름/오류/혼잡 제어</div>
+            <div class="vs-item">헤더: 20~60 byte</div>
+            <div class="vs-item" style="margin-top:6px"><strong>활용:</strong> HTTP, FTP, 이메일</div>
+          </div>
+          <div class="vs-col">
+            <div class="vs-label orange">UDP</div>
+            <div class="vs-item"><strong>비연결형</strong></div>
+            <div class="vs-item">신뢰성 없음 (오류검출만)</div>
+            <div class="vs-item">제어 없음 → 빠름</div>
+            <div class="vs-item">헤더: 8 byte (고정)</div>
+            <div class="vs-item" style="margin-top:6px"><strong>활용:</strong> DNS, 스트리밍, VoIP</div>
+          </div>
+        </div>
+        <div class="memo-box" style="margin-top:12px">
+          <div class="memo-title">📝 TCP 3-way Handshake (연결 수립)</div>
+          <div class="flow" style="margin-top:6px">
+            <div class="flow-step" style="background:var(--navy);font-size:11px">클라이언트</div>
+            <div style="text-align:center">
+              <div style="font-size:11px;color:var(--blue);font-weight:700">① SYN →</div>
+              <div style="font-size:11px;color:var(--green);font-weight:700">← ② SYN+ACK</div>
+              <div style="font-size:11px;color:var(--amber);font-weight:700">③ ACK →</div>
+            </div>
+            <div class="flow-step" style="background:var(--navy);font-size:11px">서버</div>
+          </div>
+          <ul style="margin-top:8px">
+            <li><strong>4-way Handshake</strong>: FIN→ACK→FIN→ACK (연결 종료)</li>
+          </ul>
+        </div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin:14px 0 8px" id="p6-ip">IP 주소 클래스</p>
+        <table class="vtable">
+          <tr><th>클래스</th><th>범위</th><th>서브넷</th></tr>
+          <tr><td><span class="tag tag-blue">A</span></td><td class="mono">0~127</td><td class="mono">/8 (255.0.0.0)</td></tr>
+          <tr><td><span class="tag tag-green">B</span></td><td class="mono">128~191</td><td class="mono">/16 (255.255.0.0)</td></tr>
+          <tr><td><span class="tag tag-amber">C</span></td><td class="mono">192~223</td><td class="mono">/24 (255.255.255.0)</td></tr>
+        </table>
+        <div class="trap-box">
+          <div class="trap-title">⚠ 서브넷 계산</div>
+          <ul>
+            <li>/26 → 호스트 비트=6 → 2^6-2 = <strong>62</strong>개 (네트워크·브로드캐스트 -2)</li>
+            <li>사설 IP: <strong>10.x.x.x / 172.16~31.x.x / 192.168.x.x</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ PART 07 ════════ -->
+<div class="part-header" id="part07">
+  <span class="part-num">PART 07</span>
+  <h2 class="part-title" style="color:var(--indigo)">소프트웨어 공학</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+<div class="content-wrap" style="padding-top:24px">
+
+  <div class="card navy" id="p7-method">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🚀</span>7-1 소프트웨어 개발 방법론</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <table class="vtable">
+      <tr><th>방법론</th><th>핵심 특징</th><th>빈출</th></tr>
+      <tr><td><b>폭포수(Waterfall)</b></td><td>순차적 진행, 각 단계 완료 후 다음 단계, 이전 단계 복귀 어려움</td><td><span class="star">★★★</span></td></tr>
+      <tr><td><b>프로토타입</b></td><td>시제품 먼저 제작, 요구사항 불명확 시 유용</td><td><span class="star">★★★</span></td></tr>
+      <tr><td><b>나선형(Spiral)</b></td><td><span class="hl-red">위험 분석</span> 중심, 폭포수+프로토타입 결합, 4단계 반복</td><td><span class="star">★★★</span></td></tr>
+      <tr><td><b>애자일(Agile)</b></td><td>반복+점진적, 고객 협업 중시, 변화에 유연</td><td><span class="star">★★★</span></td></tr>
+      <tr><td><b>스크럼(Scrum)</b></td><td>스프린트(2~4주) 단위 반복, 데일리 스크럼(15분)</td><td><span class="star">★★★</span></td></tr>
+      <tr><td><b>XP</b></td><td>TDD, 페어 프로그래밍, 리팩토링, 지속적 통합</td><td><span class="star">★★</span><span class="star off">★</span></td></tr>
+    </table>
+    <div class="memo-box" style="margin-top:14px">
+      <div class="memo-title">📝 나선형 모델 4단계 (순서 암기!)</div>
+      <div class="flow">
+        <div class="flow-step highlight">① 계획 수립</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step red">② 위험 분석 ⭐</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step teal">③ 개발·검증</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step green">④ 고객 평가</div>
+        <div class="flow-arrow">→ 반복</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card purple" id="p7-quality">
+    <div class="card-header">
+      <div class="card-title"><span class="icon">🏆</span>7-2 소프트웨어 품질 & McCabe</div>
+      <span class="freq"><span class="star">★★★</span></span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">ISO/IEC 25010 품질 특성 8가지</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div style="padding:10px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--purple)">기능 적합성</div><div style="color:var(--muted);font-size:11px">기능을 정확히 제공</div></div>
+          <div style="padding:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--blue)">성능 효율성</div><div style="color:var(--muted);font-size:11px">자원 대비 성능</div></div>
+          <div style="padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--green)">신뢰성</div><div style="color:var(--muted);font-size:11px">조건 내 기능 유지</div></div>
+          <div style="padding:10px;background:#fef9ee;border:1px solid #fde68a;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--amber)">사용성</div><div style="color:var(--muted);font-size:11px">쉽고 효과적 사용</div></div>
+          <div style="padding:10px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--red)">보안성</div><div style="color:var(--muted);font-size:11px">정보 보호·접근제어</div></div>
+          <div style="padding:10px;background:#ccfbf1;border:1px solid #5eead4;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--teal)">유지보수성</div><div style="color:var(--muted);font-size:11px">수정·개선 용이</div></div>
+          <div style="padding:10px;background:#faf5ff;border:1px solid #ddd6fe;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--purple)">호환성</div><div style="color:var(--muted);font-size:11px">다른 시스템과 공존</div></div>
+          <div style="padding:10px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;font-size:12px"><div style="font-weight:700;color:var(--slate)">이식성</div><div style="color:var(--muted);font-size:11px">다른 환경에서 동작</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="memo-box">
+          <div class="memo-title">📝 McCabe 순환복잡도 계산 공식</div>
+          <ul>
+            <li><strong>공식 1:</strong> V(G) = <span class="hl-blue">분기문(조건문) 수 + 1</span></li>
+            <li><strong>공식 2:</strong> V(G) = E − N + 2P</li>
+            <li><span style="color:var(--muted);font-size:11px">(E=간선수, N=노드수, P=연결컴포넌트수)</span></li>
+            <li style="margin-top:6px">if 3개 + while 2개 → V(G) = <strong>5+1 = 6</strong></li>
+            <li><span class="hl-red">복잡도 10 이하 권장</span></li>
+          </ul>
+        </div>
+        <p style="font-size:12px;font-weight:700;color:var(--navy);margin:14px 0 8px">응집도 vs 결합도</p>
+        <div class="vs-wrap">
+          <div class="vs-col">
+            <div class="vs-label blue">응집도 (높을수록 ↑ 좋음)</div>
+            <div style="font-size:11px;line-height:1.9">
+              <span class="tag tag-green" style="margin-right:4px">기능</span>가장 강함<br>
+              순차 → 통신 → 절차<br>
+              시간 → 논리<br>
+              <span class="tag tag-red">우연</span>가장 약함
+            </div>
+          </div>
+          <div class="vs-col">
+            <div class="vs-label orange">결합도 (낮을수록 ↓ 좋음)</div>
+            <div style="font-size:11px;line-height:1.9">
+              <span class="tag tag-red">내용</span>가장 강함<br>
+              공통 → 외부 → 제어<br>
+              스탬프<br>
+              <span class="tag tag-green">데이터</span>가장 약함
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ PART 08 ════════ -->
+<div class="part-header" id="part08">
+  <span class="part-num">PART 08</span>
+  <h2 class="part-title" style="color:var(--red)">🎯 시험 직전 최종 암기 리스트</h2>
+</div>
+<div class="section-divider"><hr class="divider-line"></div>
+<div class="content-wrap" style="padding-top:24px" id="p8-final">
+
+  <div class="grid-2">
+    <div class="card red">
+      <div class="card-title" style="margin-bottom:14px"><span class="icon">🔴</span>SQL 핵심 압축</div>
+      <div class="memo-box">
+        <div class="memo-title">📝 처리 순서</div>
+        <p style="font-size:13px;font-weight:700;color:var(--navy)">FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY</p>
+      </div>
+      <div class="trap-box" style="margin-top:10px">
+        <div class="trap-title">⚠ 핵심 함정</div>
+        <ul>
+          <li>DDL = <strong>AUTO COMMIT</strong> (ROLLBACK 불가)</li>
+          <li>COUNT(*) = NULL 포함 / COUNT(컬럼) = NULL 제외</li>
+          <li>TRUNCATE(DDL) vs DELETE(DML)</li>
+          <li>GRANT/REVOKE = DCL / COMMIT/ROLLBACK = TCL</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card green">
+      <div class="card-title" style="margin-bottom:14px"><span class="icon">🟢</span>정렬 복잡도 압축</div>
+      <div class="tip-box">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px">📝 암기 공식</div>
+        <p style="font-size:13px"><span class="hl-green">O(n log n)</span>: 퀵, 합병, 힙</p>
+        <p style="font-size:13px;margin-top:4px"><span class="hl-red">O(n²)</span>: 버블, 선택, 삽입</p>
+        <p style="font-size:13px;margin-top:4px"><span class="hl-blue">안정 정렬 (버삽합)</span>: 버블, 삽입, 합병</p>
+        <p style="font-size:13px;margin-top:4px"><span class="hl-amber">퀵 정렬 최악</span>: 이미 정렬된 경우 O(n²)</p>
+      </div>
+    </div>
+
+    <div class="card blue">
+      <div class="card-title" style="margin-bottom:14px"><span class="icon">🔵</span>OSI 7계층 압축</div>
+      <div class="memo-box">
+        <div class="memo-title">📝 암기법: 아표세전네데물</div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px;text-align:center">
+          <div style="background:var(--purple);color:#fff;border-radius:6px;padding:6px 2px;font-size:11px;font-weight:700">7<br>응용</div>
+          <div style="background:#6d28d9;color:#fff;border-radius:6px;padding:6px 2px;font-size:11px;font-weight:700">6<br>표현</div>
+          <div style="background:var(--indigo);color:#fff;border-radius:6px;padding:6px 2px;font-size:11px;font-weight:700">5<br>세션</div>
+          <div style="background:var(--blue);color:#fff;border-radius:6px;padding:6px 2px;font-size:11px;font-weight:700">4<br>전송</div>
+          <div style="background:var(--teal);color:#fff;border-radius:6px;padding:6px 2px;font-size:11px;font-weight:700">3<br>네트워크</div>
+          <div style="background:var(--green);color:#fff;border-radius:6px;padding:6px 2px;font-size:11px;font-weight:700">2<br>데이터링크</div>
+          <div style="background:var(--amber);color:#fff;border-radius:6px;padding:6px 2px;font-size:11px;font-weight:700">1<br>물리</div>
+        </div>
+        <p style="font-size:11px;color:var(--slate);margin-top:8px">전송단위: <strong>세그먼트 / 패킷 / 프레임 / 비트</strong></p>
+      </div>
+    </div>
+
+    <div class="card amber">
+      <div class="card-title" style="margin-bottom:14px"><span class="icon">🟡</span>헷갈리는 개념 정리</div>
+      <table class="vtable">
+        <tr><th>개념</th><th>핵심 차이</th></tr>
+        <tr><td>오버<b>로딩</b></td><td>같은 클래스, 매개변수 <span class="tag tag-red">다름</span></td></tr>
+        <tr><td>오버<b>라이딩</b></td><td>부모→자식, 매개변수 <span class="tag tag-blue">동일</span></td></tr>
+        <tr><td>집합(◇)</td><td>부분이 <span class="tag tag-green">독립 존재 가능</span></td></tr>
+        <tr><td>합성(◆)</td><td>부분이 <span class="tag tag-red">독립 존재 불가</span></td></tr>
+        <tr><td>공유 락</td><td>읽기 허용, 쓰기 차단</td></tr>
+        <tr><td>배타 락</td><td>읽기·쓰기 모두 차단</td></tr>
+        <tr><td>REDO</td><td>완료 트랜잭션 <span class="tag tag-green">재실행</span></td></tr>
+        <tr><td>UNDO</td><td>미완료 트랜잭션 <span class="tag tag-red">취소</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 주요 약어 -->
+  <div class="card navy">
+    <div class="card-title" style="margin-bottom:16px"><span class="icon">📌</span>주요 영문 약어 완전 정리</div>
+    <div class="grid-3">
+      <table class="vtable">
+        <tr><th>약어</th><th>풀이</th></tr>
+        <tr><td class="mono" style="color:var(--red);font-weight:700">ACID</td><td>Atomicity·Consistency·Isolation·Durability</td></tr>
+        <tr><td class="mono" style="color:var(--blue);font-weight:700">CRUD</td><td>Create·Read·Update·Delete</td></tr>
+        <tr><td class="mono" style="color:var(--purple);font-weight:700">SOLID</td><td>객체지향 설계 5원칙</td></tr>
+        <tr><td class="mono" style="color:var(--green);font-weight:700">REST</td><td>Representational State Transfer</td></tr>
+        <tr><td class="mono">MVC</td><td>Model·View·Controller</td></tr>
+        <tr><td class="mono">OOP</td><td>Object-Oriented Programming</td></tr>
+      </table>
+      <table class="vtable">
+        <tr><th>약어</th><th>풀이</th></tr>
+        <tr><td class="mono" style="color:var(--teal);font-weight:700">OSI</td><td>Open Systems Interconnection</td></tr>
+        <tr><td class="mono" style="color:var(--amber);font-weight:700">TCP/IP</td><td>Transmission Control Protocol/IP</td></tr>
+        <tr><td class="mono">SQL</td><td>Structured Query Language</td></tr>
+        <tr><td class="mono">DBMS</td><td>Database Management System</td></tr>
+        <tr><td class="mono" style="color:var(--red);font-weight:700">TDD</td><td>Test Driven Development</td></tr>
+        <tr><td class="mono">CI/CD</td><td>Continuous Integration/Delivery</td></tr>
+      </table>
+      <table class="vtable">
+        <tr><th>약어</th><th>풀이</th></tr>
+        <tr><td class="mono">AES</td><td>Advanced Encryption Standard</td></tr>
+        <tr><td class="mono">RSA</td><td>Rivest–Shamir–Adleman</td></tr>
+        <tr><td class="mono">SSL/TLS</td><td>Secure Sockets Layer / Transport Layer Security</td></tr>
+        <tr><td class="mono">IDE</td><td>Integrated Development Environment</td></tr>
+        <tr><td class="mono">API</td><td>Application Programming Interface</td></tr>
+        <tr><td class="mono">UML</td><td>Unified Modeling Language</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:40px 0 20px">
+    <div style="font-size:28px;margin-bottom:10px">🎯</div>
+    <p style="font-size:18px;font-weight:900;color:var(--navy)">포기하지 말고 반복하면 반드시 합격합니다!</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:6px">정보처리기사 실기 단권화 노트 | 2025 최신 기출 반영</p>
+  </div>
+
+</div><!-- /content-wrap -->
+</main>
+
+<script>
+// 네비게이션 활성 상태 업데이트
+const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('[id^="p"]');
+
+function updateNav() {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navItems.forEach(n => {
+    n.classList.toggle('active', n.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+</script>
+</body>
+</html>

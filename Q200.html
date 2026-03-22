@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>정처기 실기 주관식 예상문제 200제</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f0f4f8; --surface:#fff; --navy:#0f2557; --blue:#1a56db;
+  --sky:#3b82f6; --teal:#0d9488; --green:#16a34a; --amber:#d97706;
+  --red:#dc2626; --purple:#7c3aed; --orange:#ea580c;
+  --border:#e2e8f0; --text:#1e293b; --muted:#64748b; --light:#f8fafc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.7}
+
+/* ── HEADER ── */
+.hdr{background:var(--navy);padding:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.hdr-inner{display:flex;align-items:center;gap:16px;padding:12px 24px;flex-wrap:wrap}
+.hdr-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;white-space:nowrap}
+.hdr-logo span{color:#60a5fa}
+.tab-row{display:flex;gap:4px}
+.tab{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.65);background:transparent;transition:all .2s;white-space:nowrap}
+.tab.active{background:#fff;color:var(--navy);border-color:#fff}
+.tab:hover:not(.active){background:rgba(255,255,255,.12);color:#fff}
+.score-row{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sc{padding:4px 12px;border-radius:99px;font-size:12px;font-weight:700;border:1.5px solid}
+.sc-o{color:var(--green);border-color:var(--green);background:rgba(22,163,74,.1)}
+.sc-x{color:var(--red);border-color:var(--red);background:rgba(220,38,38,.1)}
+.sc-skip{color:var(--amber);border-color:var(--amber);background:rgba(217,119,6,.1)}
+
+/* ── FILTER BAR ── */
+.filter-bar{padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.filter-bar label{font-size:12px;font-weight:700;color:var(--muted);margin-right:4px}
+.fbtn{padding:5px 12px;border-radius:99px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--light);color:var(--muted);transition:all .2s;white-space:nowrap}
+.fbtn:hover{border-color:var(--sky);color:var(--sky)}
+.fbtn.on{background:var(--sky);border-color:var(--sky);color:#fff}
+.filter-sep{width:1px;height:20px;background:var(--border);margin:0 4px}
+.search-box{margin-left:auto;display:flex;align-items:center;gap:6px}
+.search-box input{padding:5px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit;outline:none;width:180px;transition:border-color .2s}
+.search-box input:focus{border-color:var(--sky)}
+
+/* ── PROGRESS BAR ── */
+.prog-wrap{padding:10px 24px 0;background:var(--surface)}
+.prog-info{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px}
+.prog-track{height:5px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:10px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--teal));border-radius:99px;transition:width .4s}
+
+/* ── MAIN ── */
+.main{padding:20px 24px 60px;max-width:900px;margin:0 auto}
+
+/* ── SECTION HEADER ── */
+.sec-hdr{display:flex;align-items:center;gap:10px;padding:28px 0 14px}
+.sec-hdr-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--muted)}
+.sec-hdr-title{font-size:18px;font-weight:900;color:var(--navy)}
+.sec-hdr-count{margin-left:auto;font-size:12px;color:var(--muted)}
+
+/* ── CAT HEADER ── */
+.cat-hdr{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;margin-bottom:10px;font-size:12px;font-weight:700;color:#fff}
+
+/* ── QUESTION CARD ── */
+.qcard{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;margin-bottom:14px;overflow:hidden;transition:box-shadow .2s;position:relative}
+.qcard:hover{box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.qcard.answered-ok{border-color:var(--green)!important}
+.qcard.answered-ok .qcard-top{background:#f0fdf4}
+.qcard.answered-wrong{border-color:var(--red)!important}
+.qcard.answered-wrong .qcard-top{background:#fef2f2}
+.qcard.skipped{border-color:var(--amber)!important;opacity:.7}
+
+.qcard-top{padding:14px 18px 12px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
+.qnum{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
+.qbody{flex:1}
+.qtext{font-size:14px;line-height:1.8;white-space:pre-line}
+.qtext.has-code{white-space:normal}
+.code-inline{display:block;font-family:'JetBrains Mono',monospace;font-size:12.5px;background:#0f172a;color:#e2e8f0;border-radius:8px;padding:10px 14px;margin:8px 0;line-height:1.7;border-left:3px solid var(--sky);overflow-x:auto}
+.hint{font-size:11px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:4px}
+.qmeta{display:flex;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap}
+.cat-tag{padding:2px 8px;border-radius:99px;font-size:10px;font-weight:700;color:#fff}
+
+/* ── INPUT AREA ── */
+.qcard-input{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start}
+.ans-input{flex:1;padding:9px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Noto Sans KR',sans-serif;resize:none;outline:none;transition:border-color .2s;min-height:42px;line-height:1.6}
+.ans-input:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.ans-input.ok{border-color:var(--green)!important;background:#f0fdf4}
+.ans-input.wrong{border-color:var(--red)!important;background:#fef2f2}
+.submit-btn{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:'Noto Sans KR',sans-serif;background:var(--navy);color:#fff}
+.submit-btn:hover{background:var(--blue);transform:translateY(-1px)}
+.skip-btn{padding:9px 12px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--muted);transition:all .2s;font-family:'Noto Sans KR',sans-serif}
+.skip-btn:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ── RESULT PANEL ── */
+.result-panel{display:none;padding:12px 18px;border-top:1px solid var(--border)}
+.result-panel.show{display:block}
+.result-correct{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin-bottom:8px}
+.result-wrong-area{background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;padding:12px 16px;margin-bottom:8px}
+.result-label{font-size:12px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.result-answer{font-size:14px;font-weight:700;color:var(--navy);line-height:1.7;white-space:pre-line}
+.result-explain{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.7}
+.kw-tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:700;background:#ede9fe;color:#6d28d9;margin-top:4px;font-family:'JetBrains Mono',monospace}
+.retry-btn{margin-top:8px;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--muted);transition:all .2s;font-family:'Noto Sans KR',sans-serif}
+.retry-btn:hover{border-color:var(--sky);color:var(--sky)}
+
+/* ── OX CARD ── */
+.oxcard{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden;transition:box-shadow .2s}
+.oxcard:hover{box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.oxcard.ox-ok{border-color:var(--green)}
+.oxcard.ox-wrong{border-color:var(--red)}
+
+.oxcard-top{padding:13px 18px;display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid var(--border)}
+.oxnum{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.oxtext{flex:1;font-size:13.5px;line-height:1.75}
+.oxbtn-row{display:flex;gap:8px;padding:10px 18px;align-items:center;border-bottom:1px solid transparent}
+.ox-btn{width:56px;height:56px;border-radius:12px;font-family:'Bebas Neue',sans-serif;font-size:28px;border:2.5px solid;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.ox-btn-o{border-color:var(--green);color:var(--green);background:rgba(22,163,74,.06)}
+.ox-btn-o:hover,.ox-btn-o.sel{background:var(--green);color:#fff;transform:scale(1.05);box-shadow:0 4px 14px rgba(22,163,74,.3)}
+.ox-btn-x{border-color:var(--red);color:var(--red);background:rgba(220,38,38,.06)}
+.ox-btn-x:hover,.ox-btn-x.sel{background:var(--red);color:#fff;transform:scale(1.05);box-shadow:0 4px 14px rgba(220,38,38,.3)}
+
+.ox-result{display:none;padding:12px 18px;background:var(--light);border-top:1px solid var(--border)}
+.ox-result.show{display:flex;gap:12px;align-items:flex-start}
+.ox-verdict{font-size:28px;font-weight:900;flex-shrink:0;line-height:1}
+.ox-verdict.v-o{color:var(--green)}
+.ox-verdict.v-x{color:var(--red)}
+.ox-result-body{flex:1}
+.ox-correct-ans{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.ox-explain{font-size:12px;color:var(--muted);line-height:1.7}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-icon{font-size:48px;margin-bottom:12px}
+.empty-text{font-size:16px;font-weight:700;color:var(--slate)}
+
+/* ── SUMMARY ── */
+.summary-bar{background:var(--navy);border-radius:14px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.sum-item{text-align:center}
+.sum-val{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1}
+.sum-lbl{font-size:10px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.sum-divider{width:1px;height:40px;background:rgba(255,255,255,.15)}
+.sum-pct-bar{flex:1;min-width:160px}
+.pct-track{height:6px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden;margin-top:6px}
+.pct-fill{height:100%;background:linear-gradient(90deg,#4ade80,#22d3ee);border-radius:99px;transition:width .6s}
+
+/* ── SCROLL TOP ── */
+.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;font-size:18px;display:none;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:all .2s;z-index:99}
+.scroll-top:hover{background:var(--blue);transform:translateY(-2px)}
+.scroll-top.vis{display:flex}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hdr-inner{padding:10px 14px}
+  .main{padding:16px 14px 50px}
+  .filter-bar{padding:10px 14px}
+  .search-box{width:100%}
+  .search-box input{flex:1}
+  .summary-bar{gap:12px}
+}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-logo">정처기 <span>실기</span> 문제풀이</div>
+    <div class="tab-row">
+      <button class="tab active" onclick="switchTab('short')">📝 단답형 100제</button>
+      <button class="tab" onclick="switchTab('ox')">⭕❌ OX 100제</button>
+    </div>
+    <div class="score-row">
+      <div class="sc sc-o">✓ <span id="cnt-ok">0</span></div>
+      <div class="sc sc-x">✗ <span id="cnt-wrong">0</span></div>
+      <div class="sc sc-skip">— <span id="cnt-skip">0</span></div>
+      <button onclick="resetAll()" style="padding:4px 12px;border-radius:8px;font-size:11px;font-weight:700;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:rgba(255,255,255,.65);cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='transparent'">초기화</button>
+    </div>
+  </div>
+  <div class="prog-wrap" id="prog-wrap">
+    <div class="prog-info"><span id="prog-text">0 / 0 완료</span><span id="prog-pct">0%</span></div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filter-bar">
+  <label>영역</label>
+  <button class="fbtn on" data-cat="all" onclick="filterCat(this,'all')">전체</button>
+  <div id="cat-btns"></div>
+  <div class="filter-sep"></div>
+  <button class="fbtn" data-cat="wrong" onclick="filterCat(this,'wrong')">❌ 틀린 것만</button>
+  <div class="search-box">
+    <input type="text" placeholder="🔍 문제 검색..." id="search-input" oninput="searchQ()">
+    <button class="fbtn" onclick="clearSearch()" style="padding:5px 10px">✕</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main" id="main-content">
+  <!-- JS renders here -->
+</main>
+
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ═══════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════
+const SHORT_Q=[[1, "UML에서 시스템을 구성하는 클래스와 클래스 간의 관계(연관, 상속, 의존 등)를 표현하는 정적 구조 다이어그램의 이름을 쓰시오.", 1, ""], [2, "GoF 디자인 패턴에서 인스턴스를 오직 하나만 생성하고 전역 접근점을 제공하는 생성 패턴의 이름을 쓰시오.", 1, ""], [3, "다음 보기에서 설명하는 UML 클래스 다이어그램의 관계를 쓰시오.\n\"전체-부분 관계이며, 부분 객체는 전체 객체 없이 독립적으로 존재할 수 없다. 집(전체)과 방(부분)의 관계가 대표적인 예이다.\"", 1, "집합(Aggregation)과 구별할 것"], [4, "GoF 디자인 패턴을 생성, 구조, 행위의 3가지 유형으로 분류할 때, Observer, Strategy, Command, Iterator가 속하는 분류를 쓰시오.", 1, ""], [5, "소프트웨어 요구사항 개발 프로세스를 순서대로 나열하시오.\n( 분석 / 확인 / 도출 / 명세 )", 1, "4단계 순서"], [6, "SOLID 원칙 중 다음 설명에 해당하는 원칙의 이름을 쓰시오.\n\"소프트웨어 요소는 확장에는 열려 있고, 수정에는 닫혀 있어야 한다.\"", 1, "영문 약어도 함께 쓸 것"], [7, "UML 유스케이스 다이어그램에서 기본 유스케이스가 특정 조건에 따라 선택적으로 다른 유스케이스를 포함하는 관계를 쓰시오.", 1, "include와 구별할 것"], [8, "다음 설명에 해당하는 GoF 구조 패턴의 이름을 쓰시오.\n\"호환되지 않는 인터페이스를 가진 클래스들이 함께 동작할 수 있도록 중간에서 인터페이스를 변환해주는 패턴. Wrapper 패턴이라고도 한다.\"", 1, ""], [9, "소프트웨어 모듈 설계에서 모듈 내부 요소들 간의 기능적 연관 정도를 나타내는 척도로, 높을수록 좋은 설계인 것의 이름을 쓰시오.", 1, "결합도와 반대 개념"], [10, "소프트웨어 아키텍처 패턴 중 Model, View, Controller 3개의 컴포넌트로 시스템을 분리하여 관심사를 분리하는 패턴의 영문 약어를 쓰시오.", 1, ""], [11, "다음 설명에 해당하는 GoF 행위 패턴의 이름을 쓰시오.\n\"한 객체의 상태가 변할 때, 그 객체에 의존하는 모든 객체에게 자동으로 알림을 전송하는 패턴. Publish-Subscribe 구조라고도 한다.\"", 1, ""], [12, "UML 다이어그램 중 시간 흐름에 따른 객체 간 메시지 교환 순서를 수직 타임라인으로 표현하는 행위 다이어그램의 이름을 쓰시오.", 1, ""], [13, "객체지향 설계 원칙 SOLID에서 각 알파벳이 의미하는 원칙을 순서대로 쓰시오.\nS - ( ① )  O - ( ② )  L - ( ③ )  I - ( ④ )  D - ( ⑤ )", 2, "한글 또는 영문 모두 가능"], [14, "다음 설명에 해당하는 GoF 생성 패턴의 이름을 쓰시오.\n\"객체 생성 인터페이스를 정의하되, 실제로 어떤 클래스의 인스턴스를 만들지는 서브클래스가 결정하도록 위임하는 패턴.\"", 1, ""], [15, "모듈 간의 의존 관계 강도를 나타내는 척도로, 낮을수록 독립성이 높아 좋은 설계인 것의 이름을 쓰시오.", 1, "응집도와 반대 개념"], [16, "응집도(Cohesion)의 종류를 강한 것부터 약한 순서로 3가지만 나열하시오.\n(우연적 / 논리적 / 시간적 / 절차적 / 통신적 / 순차적 / 기능적 중에서)", 1, "가장 강한 것 → 약한 방향"], [17, "소프트웨어 아키텍처에서 데이터 흐름을 파이프(Pipe)와 필터(Filter)를 통해 처리하는 패턴의 이름을 쓰시오.", 1, ""], [18, "다음 설명에 해당하는 GoF 구조 패턴의 이름을 쓰시오.\n\"복잡한 서브시스템에 단순화된 단일 인터페이스를 제공하여 사용하기 쉽게 만드는 패턴.\"", 1, ""], [19, "요구사항 명세 기법 중 사용자와 시스템 간의 상호작용을 시나리오 형태로 기술하는 기법의 이름을 쓰시오.", 1, "UML의 행위 다이어그램과 연관"], [20, "UML 클래스 다이어그램에서 한 클래스가 다른 클래스를 사용(매개변수, 지역변수 등)하는 일시적 관계를 나타내는 관계의 이름을 쓰시오.", 1, "점선 화살표로 표현"], [21, "다음 이진트리를 후위 순회(Postorder)한 결과를 쓰시오.\n      A\n    /   \\\n   B     C\n  / \\   / \\\n D   E F   G", 1, "왼쪽-오른쪽-루트 순서"], [22, "스택(Stack)과 큐(Queue)의 데이터 처리 방식을 각각 약어로 쓰시오.\n스택: ( ① )   큐: ( ② )", 1, ""], [23, "다음 배열을 버블 정렬(Bubble Sort)로 오름차순 정렬할 때, 1회전 수행 후의 배열 상태를 쓰시오.\n[ 5, 3, 8, 1, 4 ]", 1, "인접한 두 원소 비교·교환"], [24, "정렬 알고리즘 중 평균, 최악 모두 O(n log n)의 시간복잡도를 보장하며, 외부 정렬(External Sort)에 적합한 분할 정복 기반 안정 정렬의 이름을 쓰시오.", 1, ""], [25, "그래프 탐색 알고리즘에서 BFS(너비 우선 탐색)는 ( ① ) 자료구조를, DFS(깊이 우선 탐색)는 ( ② ) 자료구조를 사용한다. 빈칸 ①과 ②를 쓰시오.", 1, ""], [26, "다음 중위 표기식을 후위 표기식(RPN)으로 변환하시오.\n( A + B ) * ( C - D )", 1, "스택을 이용한 변환"], [27, "이진 탐색(Binary Search) 알고리즘의 평균 시간복잡도를 Big-O 표기법으로 쓰시오.", 1, ""], [28, "다음 보기의 정렬 알고리즘을 시간복잡도가 O(n²)인 것과 O(n log n)인 것으로 구분하시오.\n[ 버블, 삽입, 선택, 퀵, 힙, 합병 ]", 1, "평균 시간복잡도 기준"], [29, "트리 구조에서 자식이 없는 노드를 무엇이라 하는가?", 1, "단말 노드라고도 함"], [30, "해시(Hash) 테이블에서 서로 다른 키가 동일한 해시값을 가지는 현상을 무엇이라 하는가?", 1, ""], [31, "완전 이진트리에서 높이(height)가 h일 때 최대 노드 수를 수식으로 표현하시오.", 1, ""], [32, "중복 계산을 방지하기 위해 이미 계산한 부분 문제의 결과를 저장해두고 재활용하는 알고리즘 설계 기법의 이름을 쓰시오.", 1, "피보나치 수열 최적화에 활용"], [33, "다음 보기에서 설명하는 정렬 알고리즘의 이름을 쓰시오.\n\"피벗(Pivot)을 기준으로 작은 값은 왼쪽, 큰 값은 오른쪽으로 분할하여 재귀적으로 정렬하는 방법. 평균 O(n log n)이지만 최악은 O(n²)이다.\"", 1, ""], [34, "스택에 A, B, C, D 순서로 push한 후 두 번 pop을 하면 어떤 데이터가 순서대로 나오는가?", 1, "LIFO 원칙 적용"], [35, "그래프에서 모든 정점을 포함하면서 사이클 없이 최소 간선으로 연결한 트리를 무엇이라 하는가?", 1, ""], [36, "안정 정렬(Stable Sort)에 해당하는 정렬 알고리즘을 아는 대로 모두 쓰시오.", 1, "동일 키 값의 상대적 순서가 유지됨"], [37, "연결 리스트(Linked List)에서 각 노드가 이전 노드와 다음 노드의 포인터를 모두 가지는 구조를 무엇이라 하는가?", 1, ""], [38, "다음 이진트리를 전위 순회(Preorder)한 결과를 쓰시오.\n      A\n    /   \\\n   B     C\n  / \\\n D   E", 1, "루트-왼쪽-오른쪽 순서"], [39, "힙(Heap) 자료구조에서 부모 노드가 자식 노드보다 항상 작거나 같은 조건을 갖는 힙의 종류를 쓰시오.", 1, "최솟값이 루트에 위치"], [40, "알고리즘의 시간복잡도를 표기할 때 최선(하한)을 나타내는 표기법을 쓰시오.", 1, "Big-O의 반대"], [41, "SQL 명령어를 DDL, DML, DCL, TCL로 분류할 때, GRANT와 REVOKE가 속하는 분류를 쓰시오.", 1, ""], [42, "SQL SELECT 문의 실행 처리 순서를 올바르게 나열하시오.\n( WHERE / HAVING / SELECT / FROM / ORDER BY / GROUP BY )", 1, "6단계 순서"], [43, "트랜잭션의 ACID 속성 4가지를 쓰시오.", 1, "영문 또는 한글 모두 가능"], [44, "데이터베이스 정규화 과정에서 1NF를 만족하는 테이블이 기본키의 일부에만 종속되는 속성(부분 함수 종속)을 제거하면 몇 정규형이 되는가?", 1, ""], [45, "SQL에서 그룹화된 결과에 조건을 적용할 때 사용하는 절의 이름을 쓰시오.", 1, "WHERE와 구별할 것"], [46, "다음 SQL 명령어 중 DDL에 해당하는 것을 모두 골라 쓰시오.\n( SELECT / CREATE / INSERT / ALTER / UPDATE / DROP / TRUNCATE )", 1, "자동 COMMIT되는 명령어"], [47, "트랜잭션에서 ROLLBACK이 가능한 SQL 명령어의 분류를 쓰시오.", 1, ""], [48, "데이터베이스 회복 기법에서 완료된 트랜잭션을 재실행하여 데이터를 복구하는 기법의 이름을 쓰시오.", 1, "UNDO와 반대"], [49, "SQL에서 COUNT(*) 와 COUNT(컬럼명)의 차이를 서술하시오.", 1, "NULL 처리 방식"], [50, "E-R 다이어그램에서 개체(Entity), 속성(Attribute), 관계(Relationship)를 표현하는 도형을 각각 쓰시오.", 1, "직사각형/타원/마름모 중 하나씩"], [51, "다음 설명에 해당하는 정규형을 쓰시오.\n\"3NF를 만족하면서 모든 결정자가 후보키인 정규형.\"", 1, ""], [52, "SQL JOIN에서 양쪽 테이블에 일치하는 행만 반환하는 JOIN의 종류를 쓰시오.", 1, "교집합에 해당"], [53, "트랜잭션 동시성 제어에서 읽기는 허용하지만 쓰기는 차단하는 락(Lock)의 종류를 쓰시오.", 1, "공유 락이라고도 함"], [54, "데이터베이스에서 TRUNCATE와 DELETE의 차이점을 2가지 이상 서술하시오.", 2, "DDL/DML 구분, ROLLBACK 가능 여부"], [55, "SQL에서 기존 테이블의 구조를 변경(컬럼 추가·수정·삭제)하는 DDL 명령어를 쓰시오.", 1, ""], [56, "데이터베이스 뷰(View)가 물리적으로 데이터를 저장하지 않는다는 특성을 표현하는 용어를 쓰시오.", 1, "논리적 _____ 테이블"], [57, "관계형 데이터베이스에서 기본키(Primary Key)의 속성 3가지를 쓰시오.", 1, "유일성, ?, NOT NULL"], [58, "트랜잭션 격리 수준(Isolation Level)을 낮은 것에서 높은 순서로 나열하시오.\n( SERIALIZABLE / READ COMMITTED / READ UNCOMMITTED / REPEATABLE READ )", 1, "4단계"], [59, "SQL에서 서브쿼리가 최소 하나의 행을 반환하는지 여부를 조건으로 사용하는 연산자를 쓰시오.", 1, ""], [60, "데이터 웨어하우스(DW)에서 다차원 데이터 분석을 지원하는 온라인 분석 처리 기술의 영문 약어를 쓰시오.", 1, "OLTP의 반대 개념"], [61, "다음 C언어 코드의 실행 결과를 쓰시오.\nint a = 5;\nint b = a++;\nprintf(\"%d %d\", a, b);", 1, "후위 증가 연산자"], [62, "다음 C언어 코드의 실행 결과를 쓰시오.\nint arr[] = {10, 20, 30, 40, 50};\nprintf(\"%d\", *(arr + 3));", 1, "포인터 산술"], [63, "C언어에서 sizeof(\"Hello\")의 값을 쓰시오.", 1, "널문자 포함 여부"], [64, "다음 Java 코드의 실행 결과를 쓰시오.\nint[] a = {1, 2, 3, 4, 5};\nSystem.out.println(a.length);", 1, ""], [65, "Java에서 메서드 오버라이딩(Overriding)과 오버로딩(Overloading)의 차이를 설명하시오.", 2, "클래스 관계, 매개변수 차이"], [66, "다음 Python 코드의 실행 결과를 쓰시오.\na = [0, 1, 2, 3, 4, 5]\nprint(a[1:5:2])", 1, "슬라이싱 문법"], [67, "다음 C언어 코드의 실행 결과를 쓰시오.\nint a = 10;\nint *p = &a;\n*p = 20;\nprintf(\"%d\", a);", 1, "포인터 역참조"], [68, "Java에서 인터페이스(interface)와 추상 클래스(abstract class)의 차이를 상속/구현 관점에서 설명하시오.", 2, "다중 구현 가능 여부"], [69, "다음 Python 코드의 실행 결과를 쓰시오.\nresult = [x**2 for x in range(6) if x % 2 == 0]\nprint(result)", 1, "리스트 컴프리헨션"], [70, "다음 C언어에서 문자열 s1과 s2가 같은지 비교하기 위한 올바른 방법을 쓰시오.\nchar s1[] = \"hello\";\nchar s2[] = \"hello\";", 1, "== 연산자로 비교하면 안 되는 이유"], [71, "다음 Java 코드에서 출력되는 값을 쓰시오.\nint x = 10;\nSystem.out.println(x > 5 ? \"A\" : \"B\");", 1, "3항 연산자"], [72, "Python에서 리스트(List), 튜플(Tuple), 딕셔너리(Dictionary), 셋(Set)을 가변(Mutable)과 불변(Immutable)으로 분류하시오.", 1, ""], [73, "다음 C언어 코드의 출력 결과를 쓰시오.\nfor(int i=0; i<5; i++) {\n    if(i==3) break;\n    printf(\"%d \", i);\n}", 1, ""], [74, "Java에서 다음 코드의 출력 결과를 쓰시오.\nString s = \"Hello World\";\nSystem.out.println(s.substring(6));", 1, "substring 인덱스"], [75, "Python에서 딕셔너리 d = {\"a\":1, \"b\":2, \"c\":3}에서 모든 키(key)만 출력하는 코드를 쓰시오.", 1, ""], [76, "OSI 7계층 모델을 1계층(물리)부터 7계층(응용)까지 순서대로 쓰시오.", 1, "7개 계층 이름"], [77, "TCP의 연결 수립 과정인 3-way Handshake의 각 단계를 쓰시오.", 1, "SYN, SYN+ACK, ACK 순서"], [78, "OSI 7계층에서 각 계층의 데이터 전송 단위를 연결하시오.\n4계층(전송): ①  3계층(네트워크): ②  2계층(데이터링크): ③  1계층(물리): ④", 1, "세그먼트/패킷/프레임/비트"], [79, "IP 주소에서 서브넷 마스크 /26을 사용할 때 한 서브넷에서 사용 가능한 호스트 수를 쓰시오.", 1, "2^(32-26) - 2"], [80, "ARP 프로토콜의 역할을 한 문장으로 설명하시오.", 1, "IP주소 ↔ MAC주소"], [81, "다음 암호화 알고리즘을 대칭키와 비대칭키로 분류하시오.\n[ AES / RSA / DES / ECC / ARIA / SEED ]", 1, ""], [82, "SQL Injection 공격을 방어하기 위한 가장 효과적인 방법을 쓰시오.", 1, "매개변수화 쿼리"], [83, "다음 보기에서 설명하는 웹 보안 공격의 이름을 쓰시오.\n\"취약한 웹 사이트에 악성 스크립트를 삽입하여 방문자의 쿠키나 세션 정보를 탈취하는 공격.\"", 1, "영문 약어로 쓸 것"], [84, "HTTPS 통신에서 사용되는 보안 프로토콜의 이름을 쓰시오.", 1, "443 포트"], [85, "전자서명(Digital Signature)에서 서명 생성과 서명 검증에 사용하는 키를 각각 쓰시오.", 1, "공개키/개인키 중 선택"], [86, "TCP와 UDP를 비교하여 각각의 주요 특징을 2가지씩 서술하시오.", 2, "연결방식, 신뢰성, 속도 등"], [87, "해시(Hash) 함수의 특성 중 \"동일한 입력은 항상 동일한 출력을 가진다\"는 특성의 이름을 쓰시오.", 1, "결정론적 특성"], [88, "IPv4와 IPv6의 주소 길이(비트)를 각각 쓰시오.", 1, ""], [89, "방화벽(Firewall)의 주요 기능을 한 문장으로 설명하시오.", 1, ""], [90, "사설 IP(Private IP) 주소 범위를 A, B, C 클래스별로 모두 쓰시오.", 1, "10.x.x.x / 172.x.x.x / 192.x.x.x"], [91, "소프트웨어 개발 방법론 중 \"나선형(Spiral) 모델\"의 4단계를 순서대로 쓰시오.", 1, "계획→위험분석→...→고객평가"], [92, "스크럼(Scrum) 방법론에서 2~4주 단위의 반복 개발 주기를 무엇이라 하는가?", 1, ""], [93, "McCabe의 순환복잡도(Cyclomatic Complexity)를 계산하는 공식 2가지를 쓰시오.", 1, "E-N+2P 공식과 분기문 기반 공식"], [94, "소프트웨어 테스트에서 하향식(Top-down) 통합 테스트에서 아직 개발되지 않은 하위 모듈을 임시로 대체하는 것을 무엇이라 하는가?", 1, "상향식의 드라이버와 구별"], [95, "소프트웨어 유지보수의 4가지 유형을 쓰시오.", 1, "수정/적응/완전/예방"], [96, "소프트웨어 개발 방법론 중 XP(Extreme Programming)의 핵심 실천 방법(Practice) 3가지 이상을 쓰시오.", 1, "TDD, 페어 프로그래밍 포함"], [97, "소프트웨어 품질 특성 ISO/IEC 25010에서 시스템이 정해진 조건에서 기능을 유지하는 능력을 나타내는 품질 특성의 이름을 쓰시오.", 1, ""], [98, "형상 관리(SCM, Software Configuration Management)의 주요 기능 4가지를 쓰시오.", 1, ""], [99, "TDD(Test Driven Development)의 개발 사이클 3단계를 순서대로 쓰시오.", 1, "Red-Green-Refactor 사이클"], [100, "소프트웨어 개발 비용 산정 기법 중 전문가들의 의견을 반복·수렴하여 예측치를 도출하는 방법의 이름을 쓰시오.", 1, ""]];
+const SHORT_A=[[1, "클래스 다이어그램 (Class Diagram)", "UML 구조 다이어그램의 대표. 클래스, 속성, 메서드, 관계(연관·상속·의존·집합·합성)를 표현한다.", "UML 구조"], [2, "Singleton 패턴", "생성자를 private으로 선언하고, static getInstance() 메서드로 단 하나의 인스턴스만 반환한다.", "생성 패턴"], [3, "합성 (Composition)", "강한 전체-부분 관계. 부분 객체는 전체 없이 독립 존재 불가. 집합(Aggregation)은 독립 존재 가능하여 다름.", "강한 소유"], [4, "행위(Behavioral) 패턴", "GoF 패턴 3분류: 생성(Creational) / 구조(Structural) / 행위(Behavioral). Observer·Strategy·Command·Iterator·State·Template Method 등이 행위 패턴.", "GoF 분류"], [5, "도출 → 분석 → 명세 → 확인", "요구사항 개발 4단계. 도출(인터뷰·브레인스토밍) → 분석(모델링) → 명세(SRS 작성) → 확인(검토·인스펙션).", "요구사항 프로세스"], [6, "개방-폐쇄 원칙 (OCP, Open-Closed Principle)", "SOLID 원칙 중 O. 기능 확장은 허용하되 기존 코드 수정은 금지. 인터페이스·추상화를 통해 구현.", "OCP"], [7, "extend 관계", "include: 기본 유스케이스가 반드시 포함. extend: 특정 조건이 만족될 때만 선택적으로 확장.", "extend vs include"], [8, "Adapter 패턴", "호환되지 않는 인터페이스를 변환하는 구조 패턴. Wrapper라고도 불린다. 레거시 코드 재활용에 유용.", "Wrapper"], [9, "응집도 (Cohesion)", "모듈 내부 요소의 기능 연관 정도. 높을수록 독립성↑. 기능적 응집도가 가장 이상적.", "응집도"], [10, "MVC", "Model(데이터·비즈니스로직) / View(화면) / Controller(제어·연결). 관심사 분리로 유지보수성 향상.", "MVC 패턴"], [11, "Observer 패턴", "Subject(주체) 상태 변경 시 등록된 Observer 전체에 자동 통보. 이벤트 처리, GUI 프레임워크에 활용.", "Publish-Subscribe"], [12, "시퀀스 다이어그램 (Sequence Diagram)", "행위 다이어그램. 객체를 수직 생명선으로 표현하고 시간 순 메시지 화살표로 상호작용 기술.", "UML 행위"], [13, "① 단일 책임 원칙(SRP) ② 개방-폐쇄 원칙(OCP) ③ 리스코프 치환 원칙(LSP) ④ 인터페이스 분리 원칙(ISP) ⑤ 의존 역전 원칙(DIP)", "SOLID: Single Responsibility / Open-Closed / Liskov Substitution / Interface Segregation / Dependency Inversion", "SOLID 5원칙"], [14, "Factory Method 패턴", "부모 클래스에서 생성 인터페이스 정의, 서브클래스에서 구체적 인스턴스 결정.", "팩토리 메서드"], [15, "결합도 (Coupling)", "모듈 간 의존 관계 강도. 낮을수록 독립성↑. 내용>공통>외부>제어>스탬프>데이터 결합도 순으로 낮아짐.", "결합도"], [16, "기능적 > 순차적 > 통신적 (교환적)", "응집도 전체 순서(강→약): 기능적 > 순차적 > 통신적(교환) > 절차적 > 시간적 > 논리적 > 우연적", "응집도 순서"], [17, "Pipe and Filter 패턴", "데이터가 파이프(연결부)를 통해 필터(처리부)를 순차 통과하는 아키텍처. UNIX 셸 파이프, 컴파일러가 대표적.", "파이프 필터"], [18, "Facade 패턴", "서브시스템의 복잡성을 단순한 단일 인터페이스로 감춤. 클라이언트가 서브시스템 내부를 몰라도 됨.", "Facade"], [19, "유스케이스 (Use Case)", "UML의 행위 다이어그램. 사용자(액터)와 시스템 간의 상호작용을 시나리오 형태로 기술하는 요구사항 명세 기법.", "유스케이스"], [20, "의존 (Dependency) 관계", "점선 화살표로 표현. 일시적 사용 관계(매개변수, 지역변수, 반환타입). 연관(Association)보다 약한 관계.", "의존 관계"], [21, "D E B F G C A", "후위 순회(왼-오-루트): D→E→B→F→G→C→A. 후위 순회 결과는 역폴란드 표기법(RPN)과 동일 원리.", "후위 순회"], [22, "① LIFO (Last In First Out)  ② FIFO (First In First Out)", "스택=LIFO: push/pop 모두 Top에서. 큐=FIFO: enqueue는 Rear, dequeue는 Front에서.", "LIFO FIFO"], [23, "[3, 5, 1, 4, 8]", "1회전: (5,3)→교환, (8,1)→교환, (8,4)→교환. 가장 큰 수(8)가 맨 뒤로 이동.", "버블 정렬"], [24, "합병 정렬 (Merge Sort)", "분할 정복 기반 안정 정렬. 최선·평균·최악 모두 O(n log n). 보조 메모리 O(n) 필요. 외부 정렬에 적합.", "합병 정렬"], [25, "① 큐(Queue)  ② 스택(Stack)", "BFS: 같은 레벨 우선 탐색 → 큐 사용. DFS: 깊이 우선 탐색 → 스택 또는 재귀 사용.", "BFS DFS"], [26, "A B + C D - *", "후위 변환: (A+B)→\"AB+\" → (C-D)→\"CD-\" → *연산 → \"AB+CD-*\".", "후위 표기법"], [27, "O(log n)", "정렬된 배열에서 중간값과 비교 → 탐색 범위 절반씩 감소. n=1024일 때 최대 10번 비교.", "이진 탐색"], [28, "O(n²): 버블, 삽입, 선택 / O(n log n): 퀵, 힙, 합병", "퀵은 최악 O(n²)지만 평균 O(n log n). 힙·합병은 항상 O(n log n).", "정렬 복잡도"], [29, "리프 노드 (Leaf Node) / 단말 노드", "자식이 없는 노드. 트리의 가장 아래 끝 노드. 차수(Degree)가 0인 노드.", "리프 노드"], [30, "해시 충돌 (Hash Collision)", "서로 다른 키가 동일한 해시값을 가지는 현상. 해결: 체이닝(Chaining), 선형 조사(Linear Probing), 이중 해싱.", "해시 충돌"], [31, "2^h - 1", "높이 h인 완전 이진트리 최대 노드: 2^h - 1. 높이 3 → 최대 7개.", "이진트리"], [32, "동적 프로그래밍 (Dynamic Programming, DP)", "메모이제이션(Memoization, 하향식) 또는 타뷸레이션(Tabulation, 상향식)으로 중복 계산 방지.", "DP"], [33, "퀵 정렬 (Quick Sort)", "피벗 기준 분할 정복. 평균 O(n log n), 최악(이미 정렬된 경우) O(n²). 불안정 정렬.", "퀵 정렬"], [34, "D, C", "A→B→C→D 순서로 push 후 pop 2회: 먼저 D(최상단), 다음 C. LIFO 원칙.", "스택 LIFO"], [35, "신장 트리 (Spanning Tree)", "모든 정점 포함 + 사이클 없음 + N-1개 간선. 최소 신장 트리(MST): 간선 가중치 합이 최소인 신장 트리.", "신장 트리"], [36, "버블 정렬, 삽입 정렬, 합병 정렬", "안정 정렬: 동일 키 값의 상대적 순서 유지. 불안정: 퀵, 힙, 선택.", "안정 정렬"], [37, "이중 연결 리스트 (Doubly Linked List)", "각 노드가 prev(이전)와 next(다음) 포인터를 가짐. 양방향 탐색 가능.", "이중 연결 리스트"], [38, "A B D E C", "전위 순회(루트-왼-오): A→B→D→E→C. C의 자식이 없으므로 C만 방문.", "전위 순회"], [39, "최소 힙 (Min Heap)", "부모 ≤ 자식인 완전 이진트리. 루트에 최솟값. 최대 힙(Max Heap): 부모 ≥ 자식, 루트에 최댓값.", "최소 힙"], [40, "Ω (Big-Omega) 표기법", "Big-O: 최악(상한) / Big-Omega(Ω): 최선(하한) / Big-Theta(Θ): 평균(정확한 경계).", "Big-Omega"], [41, "DCL (Data Control Language)", "DCL: GRANT(권한 부여), REVOKE(권한 취소). DDL: CREATE/ALTER/DROP/TRUNCATE. DML: SELECT/INSERT/UPDATE/DELETE. TCL: COMMIT/ROLLBACK/SAVEPOINT.", "DCL"], [42, "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY", "SQL 처리 순서 6단계. 작성 순서(SELECT~ORDER BY)와 처리 순서는 다름. HAVING은 반드시 GROUP BY 이후.", "SQL 처리순서"], [43, "원자성(Atomicity), 일관성(Consistency), 격리성(Isolation), 지속성(Durability)", "ACID: Atomicity(All or Nothing), Consistency(일관상태 유지), Isolation(동시실행 간섭 없음), Durability(완료 후 영구보존).", "ACID"], [44, "2NF (제2정규형)", "2NF: 1NF + 부분 함수 종속 제거. 기본키가 단일 컬럼이면 자동으로 2NF 만족.", "2NF"], [45, "HAVING", "WHERE: 그룹화 전 조건(집계함수 불가). HAVING: 그룹화 후 조건(집계함수 사용 가능). GROUP BY와 함께 사용.", "HAVING"], [46, "CREATE, ALTER, DROP, TRUNCATE", "DDL은 자동 COMMIT(ROLLBACK 불가). DML(SELECT/INSERT/UPDATE/DELETE)은 명시적 COMMIT 필요.", "DDL"], [47, "DML (Data Manipulation Language)", "DML(INSERT/UPDATE/DELETE/SELECT)은 트랜잭션 안에서 실행되어 ROLLBACK 가능. DDL은 AUTO COMMIT으로 불가.", "DML ROLLBACK"], [48, "REDO", "REDO: 완료된 트랜잭션을 재실행하여 복구(전방 회복). UNDO: 미완료 트랜잭션 취소(후방 회복). 로그 파일 기반.", "REDO"], [49, "COUNT(*): NULL 포함 전체 행 수 카운트. COUNT(컬럼명): 해당 컬럼의 NULL을 제외한 행 수 카운트.", "모든 집계함수(SUM, AVG, MAX, MIN)는 NULL을 자동 제외. COUNT(*)만 NULL 포함.", "COUNT NULL"], [50, "개체(Entity): 직사각형, 속성(Attribute): 타원, 관계(Relationship): 마름모", "E-R 다이어그램 표기: 개체=□, 속성=○(타원), 관계=◇(마름모), 관계선=실선.", "ERD 표기"], [51, "BCNF (Boyce-Codd 정규형)", "BCNF = 3NF 만족 + 모든 결정자가 후보키. 3NF를 만족해도 BCNF 불만족일 수 있음.", "BCNF"], [52, "INNER JOIN", "교집합. 양쪽에 모두 존재하는 행만 반환. OUTER JOIN은 일치하지 않는 행도 NULL로 포함.", "INNER JOIN"], [53, "공유 락 (Shared Lock, S-Lock)", "공유 락: 읽기 허용, 쓰기 차단. 배타 락(Exclusive Lock): 읽기·쓰기 모두 차단.", "공유 락"], [54, "① TRUNCATE는 DDL, DELETE는 DML ② TRUNCATE는 ROLLBACK 불가, DELETE는 ROLLBACK 가능 ③ TRUNCATE가 더 빠르고 로그 없음", "TRUNCATE: 전체 삭제(조건 없음), AUTO COMMIT. DELETE: 조건부 삭제, 트랜잭션 안에서 실행.", "TRUNCATE vs DELETE"], [55, "ALTER", "ALTER TABLE 테이블명 ADD/MODIFY/DROP COLUMN 컬럼명. 테이블 구조 변경 DDL 명령어.", "ALTER"], [56, "가상(Virtual)", "뷰(View)는 논리적 가상 테이블. 물리적 데이터 없음. 기반 테이블 데이터를 SELECT로 보여주는 논리 구조.", "가상 테이블"], [57, "유일성(Unique), 최소성(Minimality), NOT NULL", "기본키 3특성: ① 유일성(중복 불가) ② 최소성(불필요한 컬럼 포함 불가) ③ NOT NULL(빈값 불가).", "기본키 특성"], [58, "READ UNCOMMITTED → READ COMMITTED → REPEATABLE READ → SERIALIZABLE", "격리 수준 낮음→높음. 높을수록 동시성↓, 무결성↑. Dirty Read/Non-Repeatable Read/Phantom Read 현상과 관련.", "트랜잭션 격리"], [59, "EXISTS", "EXISTS: 서브쿼리가 1개 이상의 행 반환 시 TRUE. NOT EXISTS로 존재하지 않는 경우도 처리 가능.", "EXISTS"], [60, "OLAP (Online Analytical Processing)", "OLAP: 다차원 분석, 데이터 웨어하우스 기반. OLTP(Online Transaction Processing): 실시간 트랜잭션 처리.", "OLAP"], [61, "6 5", "후위++: b=a 대입 먼저(b=5) → a 증가(a=6). 전위면 ++a: a 먼저 증가 후 대입.", "C 후위증가"], [62, "40", "*(arr+3) = arr[3] = 40. 포인터 산술: arr+3은 arr에서 3*sizeof(int) = 12바이트 앞 주소.", "C 포인터"], [63, "6", "\"Hello\"는 H,e,l,l,o + 널문자(\\0) = 6바이트. strlen(\"Hello\")=5, sizeof(\"Hello\")=6. 널문자 포함 여부가 핵심.", "sizeof"], [64, "5", "Java 배열의 .length는 배열 원소 수(5개). 마지막 인덱스(4)가 아님. String의 .length()와 구분(괄호 없음).", "Java 배열"], [65, "오버라이딩: 부모-자식 클래스 간, 메서드명+매개변수+반환타입 동일, 런타임 다형성.\n오버로딩: 같은 클래스 내, 메서드명 동일하지만 매개변수(타입/개수) 다름, 컴파일 다형성.", "오버라이딩=재정의(부모→자식), 오버로딩=중복정의(같은 클래스).", "오버로딩 오버라이딩"], [66, "[1, 3]", "a[1:5:2]: 인덱스 1부터 5 미만까지 간격 2 → a[1]=1, a[3]=3 → [1,3].", "Python 슬라이싱"], [67, "20", "*p = 20: p가 가리키는 주소(a의 주소)에 20 저장 → a = 20. 포인터 역참조로 원본 변수 변경.", "C 포인터 역참조"], [68, "interface: 다중 구현(implements) 가능, 모든 메서드 기본 abstract(Java 8 이후 default 메서드 허용).\nabstract class: 단일 상속(extends)만 가능, 일반 메서드와 추상 메서드 혼용 가능.", "Java 인터페이스는 다중 구현으로 다중 상속 효과. abstract class는 공통 구현 공유에 적합.", "interface vs abstract"], [69, "[0, 4, 16]", "range(6)=[0..5], 짝수(x%2==0): 0,2,4 → 제곱: 0,4,16. 리스트 컴프리헨션: [표현식 for 변수 in 순회 if 조건].", "Python 컴프리헨션"], [70, "strcmp(s1, s2) == 0 을 사용한다.", "배열명은 주소값이므로 s1==s2는 주소 비교. strcmp(): 같으면 0, s1>s2는 양수, s1<s2는 음수 반환.", "C strcmp"], [71, "A", "x=10 > 5 → true → \"A\" 출력. 3항 연산자: 조건 ? 참일때값 : 거짓일때값.", "Java 3항연산자"], [72, "가변(Mutable): 리스트(List), 딕셔너리(Dict), 셋(Set) / 불변(Immutable): 튜플(Tuple), 문자열(str), 숫자형", "Mutable은 내용 변경 가능. Immutable은 변경 시 새 객체 생성.", "Python 가변 불변"], [73, "0 1 2", "i=0,1,2 출력 후 i=3에서 break. break는 반복문 즉시 종료.", "C break"], [74, "World", "substring(6): 인덱스 6부터 끝까지. \"Hello World\"에서 인덱스 6은 'W'.", "Java substring"], [75, "print(d.keys()) 또는 for k in d: print(k)", "d.keys(): 딕셔너리 키 반환(dict_keys 객체). d.values(): 값 반환. d.items(): (키,값) 쌍 반환.", "Python dict"], [76, "1물리 → 2데이터링크 → 3네트워크 → 4전송 → 5세션 → 6표현 → 7응용", "암기: \"물데네전세표응\". 장비: 허브(1)/스위치(2)/라우터(3). 전송단위: 비트/프레임/패킷/세그먼트.", "OSI 7계층"], [77, "① 클라이언트→서버: SYN  ② 서버→클라이언트: SYN+ACK  ③ 클라이언트→서버: ACK", "3-way Handshake: 연결 수립. 연결 종료는 4-way(FIN→ACK→FIN→ACK).", "3-way Handshake"], [78, "① 세그먼트(Segment)  ② 패킷(Packet)  ③ 프레임(Frame)  ④ 비트(Bit)", "전송단위 암기: 4계층=세그먼트, 3계층=패킷, 2계층=프레임, 1계층=비트.", "OSI 전송단위"], [79, "62개", "호스트 비트 = 32-26 = 6비트 → 2^6 = 64 - 2(네트워크 주소+브로드캐스트 주소) = 62개.", "서브넷 계산"], [80, "ARP는 IP 주소를 MAC 주소로 변환하는 프로토콜이다.", "ARP: IP→MAC. RARP: MAC→IP. DNS: 도메인명→IP.", "ARP"], [81, "대칭키: AES, DES, ARIA, SEED / 비대칭키: RSA, ECC", "대칭키: 하나의 키로 암호화·복호화(빠름, 키 배송 문제). 비대칭키: 공개키+개인키(느림, 키 배송 문제 해결).", "암호화 분류"], [82, "PreparedStatement (매개변수화 쿼리, Parameterized Query) 사용", "SQL 구조와 데이터를 분리하여 입력값이 쿼리 구조를 변경할 수 없게 함.", "SQL Injection 방어"], [83, "XSS (Cross-Site Scripting)", "XSS: 악성 스크립트 삽입 → 사용자 쿠키/세션 탈취. 방어: 입력 검증, 출력 인코딩(HTML Escape). CSRF와 혼동 주의.", "XSS"], [84, "SSL/TLS (Secure Sockets Layer / Transport Layer Security)", "HTTPS = HTTP + SSL/TLS. 443포트. 핸드쉐이크: 비대칭키로 대칭키 교환 → 이후 대칭키로 통신(하이브리드).", "SSL TLS"], [85, "서명 생성: 개인키(Private Key) / 서명 검증: 공개키(Public Key)", "전자서명은 암호화의 역순. 암호화: 공개키↑, 복호화: 개인키↑ / 서명: 개인키↑, 검증: 공개키↑.", "전자서명"], [86, "TCP: 연결 지향(3-way Handshake), 신뢰성 보장(오류제어·재전송·순서보장) / UDP: 비연결, 빠름(오버헤드 없음), 신뢰성 미보장", "TCP: HTTP/FTP/이메일. UDP: DNS/스트리밍/VoIP/게임. UDP 헤더 8byte(고정), TCP 헤더 20~60byte.", "TCP vs UDP"], [87, "결정론적 특성 (Deterministic)", "해시 함수 4특성: ① 결정론적(동일입력=동일출력) ② 단방향(역계산 불가) ③ 고정출력길이 ④ 눈사태 효과.", "해시 특성"], [88, "IPv4: 32비트 / IPv6: 128비트", "IPv4: 4옥텟 10진수(192.168.1.1), 약 43억 주소. IPv6: 16진수 8그룹(2001:db8::1), 사실상 무한 주소.", "IP 주소"], [89, "방화벽은 사전에 정의된 규칙에 따라 네트워크 패킷을 필터링하여 허가되지 않은 외부 접근을 차단한다.", "방화벽 유형: 패킷 필터링 / 상태 검사(Stateful Inspection) / 애플리케이션 게이트웨이.", "방화벽"], [90, "A클래스: 10.0.0.0 ~ 10.255.255.255 / B클래스: 172.16.0.0 ~ 172.31.255.255 / C클래스: 192.168.0.0 ~ 192.168.255.255", "사설 IP는 인터넷 직접 라우팅 불가. NAT(Network Address Translation)로 공인 IP와 변환.", "사설 IP"], [91, "① 계획 수립 → ② 위험 분석 → ③ 개발 및 검증 → ④ 고객 평가", "나선형 모델 = 폭포수 + 프로토타입 + 위험관리. 4단계를 반복(나선형으로 발전). 위험 분석이 핵심.", "나선형 모델"], [92, "스프린트 (Sprint)", "스크럼 주요 요소: 스프린트(2~4주 반복), 스프린트 백로그, 데일리 스크럼(15분 회의), 스프린트 리뷰, 회고.", "스크럼 스프린트"], [93, "① V(G) = E - N + 2P  (E: 간선수, N: 노드수, P: 연결 컴포넌트수)\n② V(G) = 분기문(조건문) 수 + 1", "순환복잡도 10 이하 권장. if/while/for/case/switch 각 1씩 카운트.", "순환복잡도"], [94, "스텁 (Stub)", "하향식: 상위 모듈 먼저 개발 → 미구현 하위 모듈 대신 스텁(Stub) 사용. 상향식: 하위 먼저 → 상위 대신 드라이버(Driver).", "스텁 Stub"], [95, "① 수정(Corrective) ② 적응(Adaptive) ③ 완전(Perfective) ④ 예방(Preventive)", "수정: 오류 수정. 적응: 환경변화(OS/HW) 대응. 완전: 기능 개선/추가. 예방: 잠재 오류 예방(리팩토링).", "유지보수 유형"], [96, "TDD(테스트 주도 개발), 페어 프로그래밍, 지속적 통합(CI), 리팩토링, 작은 릴리즈, 코딩 표준", "XP 12 실천법 중 주요: TDD, 페어프로그래밍, 단순설계, 리팩토링, 지속적통합, 작은릴리즈, 코딩표준.", "XP 실천방법"], [97, "신뢰성 (Reliability)", "ISO/IEC 25010 품질특성 8가지: 기능적합성/성능효율성/호환성/사용성/신뢰성/보안성/유지보수성/이식성.", "신뢰성"], [98, "① 형상 식별 ② 버전 관리 ③ 변경 제어 ④ 형상 감사 (및 형상 상태 기록)", "SCM 도구: Git, SVN, CVS 등. CI/CD 파이프라인의 기반. 베이스라인(Baseline) 관리가 핵심.", "SCM"], [99, "① 실패하는 테스트 작성(Red) → ② 테스트 통과 코드 작성(Green) → ③ 리팩토링(Refactor)", "TDD Red-Green-Refactor 사이클. 테스트가 개발을 주도. XP의 핵심 실천 방법 중 하나.", "TDD"], [100, "델파이 기법 (Delphi Technique)", "전문가 익명 설문 → 피드백 → 반복 수렴. 집단 사고 방지. 전문가 경험 활용.", "델파이 기법"]];
+const OX_Q=[[1, "UML 클래스 다이어그램은 구조(Structure) 다이어그램에 속한다."], [2, "Singleton 패턴은 생성자를 public으로 선언하여 누구나 인스턴스를 생성할 수 있도록 한다."], [3, "UML 합성(Composition) 관계에서 부분 객체는 전체 객체 없이 독립적으로 존재할 수 있다."], [4, "Observer 패턴은 GoF 행위(Behavioral) 패턴에 속한다."], [5, "요구사항 개발 프로세스는 도출 → 분석 → 명세 → 확인 순서이다."], [6, "Adapter 패턴은 GoF 행위(Behavioral) 패턴에 속한다."], [7, "개방-폐쇄 원칙(OCP)은 기존 코드를 수정하지 않고 새로운 기능을 추가할 수 있어야 함을 의미한다."], [8, "UML 유스케이스 다이어그램에서 include 관계는 기본 유스케이스가 다른 유스케이스를 반드시 포함하는 관계이다."], [9, "소프트웨어 모듈 설계에서 결합도(Coupling)는 높을수록 좋다."], [10, "기능적 응집도(Functional Cohesion)는 응집도 유형 중 가장 강하여 가장 이상적인 응집 형태이다."], [11, "Strategy 패턴은 알고리즘을 캡슐화하여 런타임에 교체 가능하게 하는 생성(Creational) 패턴이다."], [12, "Factory Method 패턴에서 어떤 클래스를 인스턴스화할지는 서브클래스가 결정한다."], [13, "UML 시퀀스 다이어그램에서 생명선(Lifeline)은 수직 점선으로 표현된다."], [14, "Facade 패턴은 복잡한 서브시스템을 단순한 인터페이스로 감싸는 구조 패턴이다."], [15, "리스코프 치환 원칙(LSP)은 자식 클래스가 부모 클래스를 완전히 대체할 수 있어야 함을 의미한다."], [16, "상위 CASE 도구는 주로 코딩과 테스트 단계를 지원한다."], [17, "MVC 패턴에서 Model은 사용자 인터페이스(UI)를 담당한다."], [18, "Template Method 패턴은 알고리즘의 골격을 추상 클래스에서 정의하고, 구체적 단계는 서브클래스에서 구현한다."], [19, "의존 역전 원칙(DIP)은 고수준 모듈이 저수준 모듈에 직접 의존해야 한다고 말한다."], [20, "Proxy 패턴은 원본 객체에 대한 접근을 제어하는 대리 객체를 제공하는 구조 패턴이다."], [21, "스택(Stack)은 FIFO(First In First Out) 구조를 따른다."], [22, "이진트리의 중위 순회(Inorder) 결과는 왼쪽 → 루트 → 오른쪽 순서이다."], [23, "합병 정렬(Merge Sort)은 안정 정렬(Stable Sort)이다."], [24, "퀵 정렬(Quick Sort)의 최악의 경우 시간복잡도는 O(n log n)이다."], [25, "BFS(너비 우선 탐색)는 큐(Queue)를 사용하여 구현한다."], [26, "이진 탐색(Binary Search)은 정렬되지 않은 배열에도 적용 가능하다."], [27, "완전 이진트리에서 높이 h일 때 최대 노드 수는 2^h - 1이다."], [28, "우선순위 큐(Priority Queue)는 힙(Heap)으로 구현하는 것이 가장 효율적이다."], [29, "후위 표기법(Postfix)은 이진트리의 전위 순회 결과와 동일하다."], [30, "선택 정렬(Selection Sort)은 안정 정렬(Stable Sort)이다."], [31, "동적 프로그래밍(DP)은 부분 문제의 해를 저장하여 중복 계산을 방지한다."], [32, "DFS(깊이 우선 탐색)는 스택(Stack) 또는 재귀로 구현한다."], [33, "삽입 정렬(Insertion Sort)은 거의 정렬된 데이터에서 O(n)에 가까운 성능을 보인다."], [34, "기수 정렬(Radix Sort)은 원소 간 비교를 기반으로 정렬하는 비교 정렬이다."], [35, "AVL 트리는 삽입/삭제 시 균형을 유지하기 위해 회전(Rotation) 연산을 수행한다."], [36, "Big-O 표기법은 알고리즘의 최악의 경우(상한) 시간복잡도를 나타낸다."], [37, "연결 리스트(Linked List)는 배열보다 임의 접근(Random Access)이 빠르다."], [38, "힙 정렬(Heap Sort)의 최선, 평균, 최악 시간복잡도는 모두 O(n log n)이다."], [39, "그래프에서 사이클이 없는 연결 그래프를 트리(Tree)라고 한다."], [40, "버블 정렬은 안정 정렬(Stable Sort)이다."], [41, "TRUNCATE는 DDL 명령어로 실행 후 ROLLBACK이 불가능하다."], [42, "SQL의 WHERE 절에서는 집계 함수(COUNT, SUM 등)를 사용할 수 있다."], [43, "BCNF는 3NF보다 더 엄격한(강한) 정규형이다."], [44, "트랜잭션의 원자성(Atomicity)은 트랜잭션의 연산이 전부 실행되거나 전혀 실행되지 않음을 의미한다."], [45, "기본키(Primary Key)에는 NULL 값을 저장할 수 있다."], [46, "GRANT와 REVOKE 명령어는 TCL(Transaction Control Language)에 속한다."], [47, "SQL의 COUNT(*) 함수는 NULL 값을 포함하여 행 수를 계산한다."], [48, "데이터베이스 뷰(View)는 물리적으로 데이터를 저장하는 실체 테이블이다."], [49, "데이터베이스 정규화를 거치면 테이블 수가 증가하고 JOIN 연산이 많아질 수 있다."], [50, "2NF를 만족하기 위해서는 이행적 함수 종속을 제거해야 한다."], [51, "SAVEPOINT는 TCL(Transaction Control Language)에 속한다."], [52, "SQL의 INNER JOIN은 양쪽 테이블에서 일치하는 행만 반환한다."], [53, "클러스터형 인덱스(Clustered Index)는 테이블당 여러 개 생성할 수 있다."], [54, "SQL에서 HAVING 절은 GROUP BY 전에 처리된다."], [55, "외래키(Foreign Key)는 참조 무결성(Referential Integrity)을 보장한다."], [56, "데이터 웨어하우스(DW)는 OLTP(실시간 트랜잭션 처리)에 최적화되어 있다."], [57, "SQL 집계 함수 AVG()는 NULL 값을 제외하고 평균을 계산한다."], [58, "E-R 다이어그램에서 속성(Attribute)은 마름모로 표현한다."], [59, "NoSQL 데이터베이스는 반드시 고정된 스키마를 정의해야 한다."], [60, "REDO는 미완료 트랜잭션을 취소하는 회복 기법이다."], [61, "Java에서 interface는 다중 구현(implements)이 가능하다."], [62, "C언어에서 sizeof(\"ABC\")의 결과는 3이다."], [63, "Python에서 리스트(List)는 변경 가능(Mutable)한 자료형이다."], [64, "Java에서 static 메서드는 인스턴스 변수(non-static)에 직접 접근할 수 있다."], [65, "C언어에서 배열명 arr은 배열의 첫 번째 원소의 주소를 나타낸다."], [66, "Python에서 튜플(Tuple)은 변경 불가능(Immutable)한 자료형이다."], [67, "Java에서 메서드 오버로딩은 반드시 부모-자식 클래스 관계에서만 가능하다."], [68, "C언어에서 후위 증가 연산자(a++)는 현재 식에서 a를 먼저 사용한 후 값을 증가시킨다."], [69, "Python에서 a[::-1]은 리스트나 문자열을 역순으로 반환한다."], [70, "Java에서 new String(\"abc\") == \"abc\"는 항상 true이다."], [71, "OSI 7계층에서 라우터(Router)는 3계층(네트워크 계층)에서 동작한다."], [72, "TCP 3-way Handshake는 연결 종료 시 사용된다."], [73, "ARP 프로토콜은 IP 주소로부터 MAC 주소를 알아내는 프로토콜이다."], [74, "RSA는 대칭키 암호화 알고리즘이다."], [75, "SHA-256은 256비트 크기의 해시값을 생성한다."], [76, "HTTPS는 443 포트를 기본으로 사용한다."], [77, "전자서명(Digital Signature)은 송신자의 개인키로 서명을 생성한다."], [78, "UDP는 TCP와 달리 흐름 제어와 오류 제어를 제공한다."], [79, "IPv6의 주소 길이는 128비트이다."], [80, "SQL Injection 방어를 위해 PreparedStatement(매개변수화 쿼리) 사용이 효과적이다."], [81, "스크럼(Scrum)에서 스프린트(Sprint)는 보통 2~4주 단위의 반복 개발 주기이다."], [82, "소프트웨어 테스트에서 경계값 분석은 화이트박스 테스트 기법이다."], [83, "McCabe 순환복잡도는 \"분기문 수 + 1\"로 계산할 수 있다."], [84, "하향식(Top-down) 통합 테스트에서는 스텁(Stub)이 필요하다."], [85, "TDD에서 개발 순서는 \"코드 작성 → 테스트 케이스 작성 → 리팩토링\"이다."], [86, "형상 관리(SCM)의 목적은 소프트웨어 변경사항을 체계적으로 추적·통제하는 것이다."], [87, "나선형(Spiral) 모델의 핵심은 위험 분석(Risk Analysis)이다."], [88, "소프트웨어 유지보수 중 오류를 수정하는 것은 완전(Perfective) 유지보수이다."], [89, "COCOMO 모형은 소스 코드 라인 수(LOC)를 기반으로 비용을 산정한다."], [90, "인수 테스트(Acceptance Test)는 개발자가 수행하는 가장 마지막 테스트이다."], [91, "XP(Extreme Programming)의 핵심 실천 방법에 TDD가 포함된다."], [92, "소프트웨어 재공학(Re-engineering)은 기존 소프트웨어를 분석하여 새로운 형태로 개선하는 것이다."], [93, "블랙박스 테스트는 소프트웨어의 내부 구조(소스코드)를 기반으로 테스트 케이스를 설계한다."], [94, "기능점수(Function Point) 기법은 소스 코드 라인 수(LOC)를 기반으로 규모를 측정한다."], [95, "알파(Alpha) 테스트는 개발사 내부 환경에서 수행하는 인수 테스트이다."], [96, "CMMI 레벨 5(최적화)가 가장 성숙한 단계이다."], [97, "소프트웨어 인스펙션(Inspection)은 워크스루(Walkthrough)보다 비공식적인 검토 방법이다."], [98, "지속적 통합(CI)은 코드 변경 시 자동으로 빌드 및 테스트를 실행하는 방법이다."], [99, "폭포수(Waterfall) 모델은 각 단계를 순차적으로 진행하며 이전 단계로 되돌아가기 어렵다."], [100, "칸반(Kanban) 방법론은 작업의 흐름을 시각화하고 WIP(진행 중 작업) 수를 제한한다."]];
+const OX_A=[[1, "O", "클래스 다이어그램은 UML 구조(Structure) 다이어그램. 행위 다이어그램에는 시퀀스, 활동, 상태, 유스케이스 등이 속한다."], [2, "X", "Singleton은 생성자를 private으로 선언하여 외부에서 인스턴스 생성을 막고, static getInstance()로만 단 하나의 인스턴스를 제공한다."], [3, "X", "합성(Composition)은 부분 객체가 전체 없이 독립 존재 불가. 독립 존재 가능한 것은 집합(Aggregation)."], [4, "O", "Observer는 GoF 행위(Behavioral) 패턴. 생성 패턴: Singleton/Factory Method 등. 구조 패턴: Adapter/Decorator 등."], [5, "O", "도출(Elicitation) → 분석(Analysis) → 명세(Specification) → 확인(Validation). 이 순서는 필수 암기."], [6, "X", "Adapter는 GoF 구조(Structural) 패턴이다. 행위 패턴에는 Observer, Strategy, Command, Iterator 등이 있다."], [7, "O", "OCP: 기능 확장(Open)은 허용하되 기존 코드 수정(Closed)은 금지. 인터페이스/추상화로 구현."], [8, "O", "include: 기본 UC가 반드시 포함(의무). extend: 조건에 따라 선택적 확장(선택)."], [9, "X", "결합도는 낮을수록 모듈 간 독립성이 높아져 유지보수가 쉬워진다. 높은 결합도 = 강한 의존성 = 나쁜 설계."], [10, "O", "응집도(강→약): 기능 > 순차 > 통신 > 절차 > 시간 > 논리 > 우연. 기능적 응집도가 최상."], [11, "X", "Strategy는 GoF 행위(Behavioral) 패턴이다. 생성 패턴에는 Singleton, Factory Method, Builder, Prototype, Abstract Factory."], [12, "O", "Factory Method: 상위 클래스에서 인터페이스 정의, 하위 클래스에서 구체 인스턴스 결정."], [13, "O", "UML 시퀀스 다이어그램의 생명선(Lifeline)은 수직 점선으로 객체의 존재 기간을 표현."], [14, "O", "Facade: 복잡한 서브시스템을 단순한 인터페이스로 포장. 클라이언트는 내부 구조 몰라도 됨."], [15, "O", "LSP(Liskov Substitution Principle): 서브클래스 객체는 부모 클래스 객체를 완전히 대체 가능해야 한다."], [16, "X", "상위 CASE: 요구분석·설계 단계 지원. 하위 CASE: 코딩·테스트 지원. 통합 CASE: 전 단계 지원."], [17, "X", "MVC에서 Model은 데이터와 비즈니스 로직 담당. View가 UI, Controller가 Model-View 중개."], [18, "O", "Template Method: 추상 클래스에서 알고리즘 골격 정의, 각 단계 세부 구현은 서브클래스에서."], [19, "X", "DIP(의존 역전 원칙): 고수준·저수준 모두 추상화(인터페이스)에 의존. 고수준이 저수준에 직접 의존하면 안 됨."], [20, "O", "Proxy: 대리 객체로 접근 제어. 종류: Remote Proxy(원격), Virtual Proxy(생성 지연), Protection Proxy(권한 제어)."], [21, "X", "스택은 LIFO(Last In First Out). FIFO(First In First Out)는 큐(Queue)의 특성이다."], [22, "O", "중위 순회(Inorder): 왼쪽 → 루트 → 오른쪽. 전위: 루트-왼-오. 후위: 왼-오-루트."], [23, "O", "합병 정렬은 안정 정렬. 동일 키의 상대적 순서 유지. 불안정 정렬: 퀵, 힙, 선택."], [24, "X", "퀵 정렬 최악은 O(n²). 피벗이 항상 최솟값/최댓값인 경우(이미 정렬된 배열). 평균은 O(n log n)."], [25, "O", "BFS: 큐(Queue)로 같은 레벨 우선 탐색. DFS: 스택(Stack) 또는 재귀로 깊이 우선 탐색."], [26, "X", "이진 탐색은 반드시 정렬된 배열에서만 사용 가능. 정렬 안 된 데이터에는 순차 탐색(O(n)) 사용."], [27, "O", "완전 이진트리 최대 노드 = 2^h - 1. 높이 1=1개, 높이 2=3개, 높이 3=7개."], [28, "O", "힙: 삽입/삭제 O(log n), 최대/최솟값 접근 O(1). 우선순위 큐에 최적."], [29, "X", "후위 표기법은 이진트리의 후위 순회(왼-오-루트)와 동일. 전위 순회는 전위 표기법과 동일."], [30, "X", "선택 정렬은 불안정 정렬. 안정 정렬: 버블, 삽입, 합병."], [31, "O", "DP의 두 가지 방식: 메모이제이션(하향식, 재귀+캐시)과 타뷸레이션(상향식, 반복)."], [32, "O", "DFS: 스택(Stack) 직접 구현 또는 재귀 함수 호출(내부적으로 콜스택 사용)."], [33, "O", "삽입 정렬: 거의 정렬된 경우 이동 횟수 최소화 → O(n)에 근접. 역순이면 O(n²)."], [34, "X", "기수 정렬(Radix Sort)은 비비교 정렬. 자릿수별로 버킷에 분류. 시간복잡도 O(kn)."], [35, "O", "AVL 트리: 불균형(|BF|>1) 발생 시 단순 회전(LL/RR) 또는 이중 회전(LR/RL)으로 균형 복구."], [36, "O", "Big-O(O): 최악(상한), Big-Omega(Ω): 최선(하한), Big-Theta(Θ): 정확한 경계(평균)."], [37, "X", "연결 리스트의 임의 접근은 O(n)(순차 탐색 필요). 배열은 인덱스로 O(1) 접근. 연결 리스트는 삽입/삭제가 O(1)."], [38, "O", "힙 정렬: 힙 구성(heapify) O(n) + 정렬 O(n log n) = O(n log n). 최선·평균·최악 모두 동일."], [39, "O", "트리 = 연결 그래프 + 사이클 없음. 노드 N개일 때 정확히 N-1개의 간선을 가짐."], [40, "O", "버블 정렬은 인접 원소를 비교·교환하는 안정 정렬. 동일 키 값의 상대적 순서 유지."], [41, "O", "TRUNCATE는 DDL → AUTO COMMIT → ROLLBACK 불가. DELETE는 DML → 트랜잭션 제어 가능."], [42, "X", "WHERE는 GROUP BY 전에 처리 → 집계함수 사용 불가. 집계함수 조건은 HAVING에서만 가능."], [43, "O", "BCNF: 3NF 조건 + 모든 결정자가 후보키. 3NF 만족 ≠ BCNF 자동 만족."], [44, "O", "원자성(Atomicity): All or Nothing. 트랜잭션 일부만 실행되는 경우 없음."], [45, "X", "기본키는 NOT NULL + UNIQUE 조건. NULL 저장 불가."], [46, "X", "GRANT, REVOKE는 DCL(Data Control Language). TCL: COMMIT, ROLLBACK, SAVEPOINT."], [47, "O", "COUNT(*): NULL 포함 전체 행 수. COUNT(컬럼): NULL 제외. 나머지 집계함수(SUM/AVG/MAX/MIN)는 모두 NULL 제외."], [48, "X", "뷰(View)는 논리적 가상 테이블. 물리적 데이터 저장 안 함. 기반 테이블의 데이터를 SELECT로 보여줌."], [49, "O", "정규화 단점: 테이블 분리 → JOIN 증가 → 성능 저하 가능. 해결: 역정규화(De-normalization)."], [50, "X", "이행적 함수 종속 제거는 3NF 조건. 2NF는 부분 함수 종속(기본키 일부에만 종속) 제거."], [51, "O", "SAVEPOINT는 TCL. 트랜잭션 내 특정 지점 설정 → ROLLBACK TO SAVEPOINT로 부분 롤백 가능."], [52, "O", "INNER JOIN = 교집합. 양쪽 테이블 모두 일치하는 행만 반환."], [53, "X", "클러스터형 인덱스: 테이블당 1개만 가능(데이터 물리적 정렬 기준). 비클러스터형: 여러 개 가능."], [54, "X", "HAVING은 GROUP BY 이후에 처리. SQL 처리 순서: FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY."], [55, "O", "외래키(FK): 참조하는 테이블의 기본키 값만 허용 → 참조 무결성 보장."], [56, "X", "데이터 웨어하우스는 OLAP(분석) 최적화. OLTP는 일반 데이터베이스(INSERT/UPDATE/DELETE 빈번)."], [57, "O", "모든 집계함수(AVG, SUM, MAX, MIN, COUNT(컬럼))는 NULL을 자동 제외. COUNT(*)만 NULL 포함."], [58, "X", "속성은 타원(Oval)으로 표현. 마름모=관계, 직사각형=개체, 실선=연결선."], [59, "X", "NoSQL의 특징: 스키마리스(Schema-less). 유연한 구조 변경 가능. MongoDB, Redis 등이 대표적."], [60, "X", "REDO: 완료된 트랜잭션 재실행(전방 회복). UNDO: 미완료 트랜잭션 취소(후방 회복)."], [61, "O", "Java: interface는 다중 implements 가능. 클래스는 단일 extends만 가능."], [62, "X", "sizeof(\"ABC\") = 4. 널문자(\\0) 포함. strlen(\"ABC\") = 3."], [63, "O", "Python 리스트: Mutable(변경 가능). 튜플: Immutable(변경 불가)."], [64, "X", "static 메서드는 클래스 레벨. 인스턴스 없이 호출 가능하므로 인스턴스 변수 직접 접근 불가."], [65, "O", "배열명 arr = &arr[0]. arr[i] == *(arr+i). 포인터 산술로 배열 접근 가능."], [66, "O", "Python 튜플(())은 Immutable. 변경 시 TypeError 발생."], [67, "X", "오버로딩은 같은 클래스 내에서 메서드명 동일 + 매개변수 다름. 부모-자식 관계는 오버라이딩."], [68, "O", "후위++: 현재 식에서 값 사용 후 증가. 전위++: 먼저 증가 후 사용. int b=a++; → b=a 먼저, 그 후 a++."], [69, "O", "a[::-1]: 처음부터 끝까지 간격 -1(역순). \"hello\"[::-1] = \"olleh\"."], [70, "X", "new String(\"abc\")는 힙에 새 객체 생성. 리터럴 \"abc\"는 String Pool. 주소가 다르므로 == false. equals() 사용 필요."], [71, "O", "라우터: 3계층(IP 기반 경로 결정). 스위치: 2계층(MAC). 허브/리피터: 1계층."], [72, "X", "3-way Handshake는 TCP 연결 수립 시 사용. 연결 종료는 4-way Handshake(FIN→ACK→FIN→ACK)."], [73, "O", "ARP: IP→MAC. RARP: MAC→IP. DNS: 도메인명→IP."], [74, "X", "RSA는 공개키 기반 비대칭키 알고리즘. 대칭키: AES, DES, ARIA, SEED."], [75, "O", "SHA-256(SHA-2 계열): 256비트 해시값. 현재 표준. MD5(128bit), SHA-1(160bit)는 취약하여 사용 지양."], [76, "O", "HTTP: 80포트, HTTPS: 443포트, FTP: 21포트, SSH: 22포트, DNS: 53포트."], [77, "O", "전자서명: 송신자 개인키로 서명 → 수신자 공개키로 검증. 부인방지+무결성+인증 보장."], [78, "X", "UDP는 흐름 제어·오류 제어·혼잡 제어를 제공하지 않음. TCP가 이 모두를 제공."], [79, "O", "IPv4: 32비트(약 43억), IPv6: 128비트(사실상 무한). IPv6 도입 이유: IPv4 주소 고갈."], [80, "O", "PreparedStatement(매개변수화 쿼리): SQL 구조와 데이터 분리 → SQL Injection 원천 차단."], [81, "O", "스크럼 스프린트: 보통 2~4주. 매 스프린트마다 잠재적으로 출시 가능한 제품 산출."], [82, "X", "경계값 분석은 블랙박스 테스트 기법. 화이트박스: 구문/결정/조건/경로/MC-DC 커버리지."], [83, "O", "V(G) = 분기문 수 + 1. if/while/for/case 각각 1씩 카운트. 또는 V(G) = E-N+2P."], [84, "O", "하향식 통합: 스텁(Stub)으로 미구현 하위 모듈 대체. 상향식: 드라이버(Driver)로 상위 모듈 대체."], [85, "X", "TDD 순서: ① 실패하는 테스트 작성(Red) → ② 테스트 통과 최소 코드 작성(Green) → ③ 리팩토링(Refactor)."], [86, "O", "SCM: 형상 식별, 버전 관리, 변경 제어, 형상 감사. Git/SVN 등이 대표 도구."], [87, "O", "나선형 모델의 핵심: 매 반복마다 위험 분석(Risk Analysis) 수행. 위험이 높은 프로젝트에 적합."], [88, "X", "오류 수정은 수정(Corrective) 유지보수. 완전(Perfective): 기능 개선·추가. 적응(Adaptive): 환경 변화 대응."], [89, "O", "COCOMO: Constructive Cost Model. LOC(라인수) 기반 비용 산정. 기본/중간/발전 세 모델."], [90, "X", "인수 테스트는 사용자/고객이 수행. 알파(개발사 환경), 베타(사용자 환경). 개발자 주도 테스트 아님."], [91, "O", "XP 12 실천법: TDD, 페어프로그래밍, 지속적통합, 리팩토링, 작은릴리즈, 코딩표준 등."], [92, "O", "재공학: 역공학(기존 시스템 분석) + 재구조화 + 순공학(새 시스템). 유지보수성·품질 향상 목적."], [93, "X", "블랙박스 테스트: 기능 명세(외부 인터페이스) 기반. 내부 구조 기반은 화이트박스 테스트."], [94, "X", "기능점수(FP): 입력/출력/조회/내부파일/외부인터페이스 수 기반. LOC와 무관."], [95, "O", "알파 테스트: 개발사 내부 통제 환경. 베타 테스트: 실제 사용자 환경(외부)."], [96, "O", "CMMI 레벨: 1(초기) → 2(관리) → 3(정의) → 4(정량관리) → 5(최적화). 5가 최고."], [97, "X", "인스펙션(Inspection)이 가장 공식적. 진행자·작성자·검토자 역할 분리. 워크스루(Walkthrough)가 더 비공식적."], [98, "O", "CI(Continuous Integration): 코드 변경 시 자동 빌드·테스트 → 통합 오류 조기 발견. CD(배포)와 함께 CI/CD 파이프라인 구성."], [99, "O", "폭포수: 요구→설계→구현→테스트→유지보수 순차 진행. 이전 단계 복귀 어려움. 요구사항 명확할 때 적합."], [100, "O", "칸반: 작업 흐름 시각화(보드), WIP(Work In Progress) 제한으로 병목 제거, 흐름 최적화."]];
+
+// ═══════════════════════════════════════
+//  APP STATE
+// ═══════════════════════════════════════
+let curTab = 'short';
+let curCat = 'all';
+let curSearch = '';
+
+// status maps: '1' -> {state:'ok'|'wrong'|'skip', userAns:'...'}
+const shortStatus = {};
+const oxStatus    = {};  // '1' -> {state:'ok'|'wrong', selected:'O'|'X'}
+
+const SHORT_CATS = [
+  {name:'소프트웨어 설계', nums: Array.from({length:20},(_,i)=>i+1),  color:'#1a56db'},
+  {name:'자료구조/알고리즘', nums: Array.from({length:20},(_,i)=>i+21), color:'#0d9488'},
+  {name:'데이터베이스', nums: Array.from({length:20},(_,i)=>i+41), color:'#7c3aed'},
+  {name:'프로그래밍 언어', nums: Array.from({length:15},(_,i)=>i+61), color:'#d97706'},
+  {name:'네트워크/보안', nums: Array.from({length:15},(_,i)=>i+76), color:'#dc2626'},
+  {name:'소프트웨어 공학', nums: Array.from({length:10},(_,i)=>i+91), color:'#16a34a'},
+];
+const OX_CATS = [
+  {name:'소프트웨어 설계', nums: Array.from({length:20},(_,i)=>i+1),  color:'#1a56db'},
+  {name:'자료구조/알고리즘', nums: Array.from({length:20},(_,i)=>i+21), color:'#0d9488'},
+  {name:'데이터베이스', nums: Array.from({length:20},(_,i)=>i+41), color:'#7c3aed'},
+  {name:'프로그래밍/네트워크/보안', nums: Array.from({length:20},(_,i)=>i+61), color:'#d97706'},
+  {name:'소프트웨어 공학', nums: Array.from({length:20},(_,i)=>i+81), color:'#16a34a'},
+];
+
+function getCat(num, cats) {
+  for (const c of cats) { if (c.nums.includes(num)) return c; }
+  return {name:'기타', color:'#666'};
+}
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('scroll-top').classList.toggle('vis', window.scrollY > 300);
+});
+
+function buildCatBtns() {
+  const cats = curTab === 'short' ? SHORT_CATS : OX_CATS;
+  let html = '';
+  for (const c of cats) {
+    html += `<button class="fbtn" data-cat="${c.name}" onclick="filterCat(this,'${c.name}')" style="border-color:${c.color};color:${c.color}">${c.name}</button>`;
+  }
+  document.getElementById('cat-btns').innerHTML = html;
+}
+
+function switchTab(tab) {
+  curTab = tab;
+  curCat = 'all';
+  curSearch = '';
+  document.getElementById('search-input').value = '';
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab')[tab === 'short' ? 0 : 1].classList.add('active');
+  document.querySelectorAll('.fbtn[data-cat]').forEach(b => b.classList.toggle('on', b.dataset.cat === 'all'));
+  buildCatBtns();
+  render();
+}
+
+function filterCat(btn, cat) {
+  curCat = cat;
+  curSearch = '';
+  document.getElementById('search-input').value = '';
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+function searchQ() {
+  curSearch = document.getElementById('search-input').value.trim();
+  curCat = 'all';
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  document.querySelector('.fbtn[data-cat="all"]').classList.add('on');
+  render();
+}
+function clearSearch() {
+  curSearch = '';
+  document.getElementById('search-input').value = '';
+  render();
+}
+
+function resetAll() {
+  if (!confirm('모든 풀이 기록을 초기화할까요?')) return;
+  Object.keys(shortStatus).forEach(k => delete shortStatus[k]);
+  Object.keys(oxStatus).forEach(k => delete oxStatus[k]);
+  render();
+}
+
+// ═══════════════════════════════════════
+//  SCORING
+// ═══════════════════════════════════════
+function checkAnswer(num, userAns) {
+  const a = SHORT_A.find(r => r[0] === num);
+  if (!a) return false;
+  const correct = a[1].toLowerCase().replace(/\s+/g,' ').trim();
+  const user    = userAns.toLowerCase().replace(/\s+/g,' ').trim();
+  if (!user) return null;
+
+  // 다중 정답 처리 (정답의 핵심 키워드 중 하나 포함)
+  const keywords = correct.split(/[,\/\n→·]/g).map(k => k.trim()).filter(k => k.length > 0);
+  const userWords = user.split(/\s+/);
+
+  // 완전 일치
+  if (user === correct) return true;
+
+  // 핵심 단어 포함 체크 (정답 단어의 50% 이상 포함)
+  let matchCount = 0;
+  for (const kw of keywords) {
+    const kwLower = kw.toLowerCase().replace(/[()]/g,'').trim();
+    if (kwLower.length > 1 && (user.includes(kwLower) || kwLower.includes(user))) {
+      matchCount++;
+    }
+  }
+
+  // 짧은 단일 정답의 경우
+  if (keywords.length === 1) {
+    const kw = keywords[0].toLowerCase().replace(/[()]/g,'').trim();
+    return user.includes(kw) || kw.includes(user);
+  }
+
+  return matchCount > 0 && (matchCount / keywords.length) >= 0.25;
+}
+
+function submitAnswer(num) {
+  const input = document.getElementById(`input-${num}`);
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+
+  const isOk = checkAnswer(num, val);
+  shortStatus[String(num)] = { state: isOk ? 'ok' : 'wrong', userAns: val };
+
+  // Update UI without full re-render
+  const card = document.getElementById(`qcard-${num}`);
+  if (card) {
+    card.classList.remove('answered-ok','answered-wrong','skipped');
+    card.classList.add(isOk ? 'answered-ok' : 'answered-wrong');
+    input.classList.remove('ok','wrong');
+    input.classList.add(isOk ? 'ok' : 'wrong');
+    input.disabled = true;
+    showResult(num, isOk, val);
+  }
+  updateScore();
+}
+
+function skipQ(num) {
+  shortStatus[String(num)] = { state: 'skip', userAns: '' };
+  const card = document.getElementById(`qcard-${num}`);
+  if (card) {
+    card.classList.add('skipped');
+    document.getElementById(`input-${num}`).disabled = true;
+  }
+  updateScore();
+}
+
+function retryQ(num) {
+  delete shortStatus[String(num)];
+  const card = document.getElementById(`qcard-${num}`);
+  if (!card) return;
+  card.classList.remove('answered-ok','answered-wrong','skipped');
+  const input = document.getElementById(`input-${num}`);
+  input.disabled = false;
+  input.value = '';
+  input.classList.remove('ok','wrong');
+  input.focus();
+  document.getElementById(`result-${num}`).classList.remove('show');
+  updateScore();
+}
+
+function showResult(num, isOk, userAns) {
+  const panel = document.getElementById(`result-${num}`);
+  const a = SHORT_A.find(r => r[0] === num);
+  if (!panel || !a) return;
+  panel.innerHTML = `
+    ${!isOk ? `<div class="result-wrong-area"><div class="result-label" style="color:var(--red)">❌ 오답  <span style="font-size:11px;font-weight:400;color:var(--muted)">입력: ${escH(userAns)}</span></div></div>` : ''}
+    <div class="result-correct">
+      <div class="result-label" style="color:var(--green)">✅ 정답</div>
+      <div class="result-answer">${escH(a[1])}</div>
+      <div class="result-explain">${escH(a[2])}</div>
+      ${a[3] ? `<div class="kw-tag"># ${escH(a[3])}</div>` : ''}
+    </div>
+    <button class="retry-btn" onclick="retryQ(${num})">↺ 다시 풀기</button>
+  `;
+  panel.classList.add('show');
+}
+
+// OX 선택
+function selectOX(num, choice) {
+  const a = OX_A.find(r => r[0] === num);
+  if (!a) return;
+  const isOk = choice === a[1];
+  oxStatus[String(num)] = { state: isOk ? 'ok' : 'wrong', selected: choice };
+
+  const card = document.getElementById(`oxcard-${num}`);
+  if (!card) return;
+  card.classList.remove('ox-ok','ox-wrong');
+  card.classList.add(isOk ? 'ox-ok' : 'ox-wrong');
+
+  // Disable buttons
+  ['O','X'].forEach(c => {
+    const btn = document.getElementById(`oxbtn-${num}-${c}`);
+    if (btn) {
+      btn.style.pointerEvents = 'none';
+      if (c === choice) btn.classList.add('sel');
+    }
+  });
+
+  // Show result
+  const res = document.getElementById(`ox-res-${num}`);
+  if (res) {
+    const correctLabel = a[1] === 'O' ? '⭕ O (맞음)' : '❌ X (틀림)';
+    res.innerHTML = `
+      <div class="ox-verdict ${isOk ? 'v-o' : 'v-x'}">${isOk ? (choice==='O'?'⭕':'❌') : (choice==='O'?'❌':'⭕')}</div>
+      <div class="ox-result-body">
+        <div class="ox-correct-ans">정답: ${correctLabel}</div>
+        <div class="ox-explain">${escH(a[2])}</div>
+      </div>
+    `;
+    res.classList.add('show');
+  }
+  updateScore();
+}
+
+// ═══════════════════════════════════════
+//  SCORE
+// ═══════════════════════════════════════
+function updateScore() {
+  const status = curTab === 'short' ? shortStatus : oxStatus;
+  const allStatus = {...shortStatus, ...oxStatus};
+  let ok=0, wrong=0, skip=0;
+  Object.values(allStatus).forEach(s => {
+    if (s.state==='ok') ok++;
+    else if (s.state==='wrong') wrong++;
+    else if (s.state==='skip') skip++;
+  });
+  document.getElementById('cnt-ok').textContent = ok;
+  document.getElementById('cnt-wrong').textContent = wrong;
+  document.getElementById('cnt-skip').textContent = skip;
+
+  // Progress for current tab
+  const curStatus = curTab === 'short' ? shortStatus : oxStatus;
+  const total = curTab === 'short' ? 100 : 100;
+  const done = Object.keys(curStatus).length;
+  const pct = Math.round(done / total * 100);
+  document.getElementById('prog-text').textContent = `${done} / ${total} 완료`;
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+// ═══════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════
+function escH(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function hasCode(text) {
+  return /\n\s*(int |float |char |void |String |def |for\(|while\(|printf|System\.|print\(|\{[\s\S]*\})/.test(text);
+}
+
+function formatQuestion(text) {
+  if (!hasCode(text)) return `<span class="qtext">${escH(text)}</span>`;
+  // Split at double newline or code-like lines
+  const lines = text.split('\n');
+  let result = '';
+  let codeLines = [];
+  let inCode = false;
+  let textLines = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    const isCode = /^(int |float |char |void |String |def |for\(|while|printf|System\.|print\(|#include|a\s*=\s*\[|\[|\{|result\s*=)/.test(trimmed)
+                   || /^\s{4,}/.test(line) && trimmed.length > 0;
+    if (isCode) {
+      if (!inCode && textLines.length) {
+        result += `<span class="qtext">${escH(textLines.join('\n'))}</span>`;
+        textLines = [];
+      }
+      inCode = true;
+      codeLines.push(line.replace(/^    /, ''));
+    } else {
+      if (inCode && codeLines.length) {
+        result += `<code class="code-inline">${escH(codeLines.join('\n'))}</code>`;
+        codeLines = [];
+        inCode = false;
+      }
+      textLines.push(line);
+    }
+  }
+  if (inCode && codeLines.length) result += `<code class="code-inline">${escH(codeLines.join('\n'))}</code>`;
+  if (textLines.length) result += `<span class="qtext">${escH(textLines.join('\n'))}</span>`;
+  return result;
+}
+
+function renderShort() {
+  const cats = SHORT_CATS;
+  let filtered = [...SHORT_Q];
+
+  if (curCat === 'wrong') {
+    filtered = filtered.filter(q => shortStatus[String(q[0])]?.state === 'wrong');
+  } else if (curCat !== 'all') {
+    const c = cats.find(c => c.name === curCat);
+    if (c) filtered = filtered.filter(q => c.nums.includes(q[0]));
+  }
+  if (curSearch) {
+    const s = curSearch.toLowerCase();
+    filtered = filtered.filter(q => q[1].toLowerCase().includes(s));
+  }
+
+  if (!filtered.length) {
+    return `<div class="empty"><div class="empty-icon">${curCat==='wrong'?'🎉':'🔍'}</div><div class="empty-text">${curCat==='wrong'?'틀린 문제가 없습니다! 🎊':'검색 결과가 없습니다.'}</div></div>`;
+  }
+
+  // Summary bar
+  const done = Object.keys(shortStatus).length;
+  const ok = Object.values(shortStatus).filter(s=>s.state==='ok').length;
+  const pct = done ? Math.round(ok/done*100) : 0;
+  let html = `<div class="summary-bar">
+    <div class="sum-item"><div class="sum-val" style="color:#60a5fa">${SHORT_Q.length}</div><div class="sum-lbl">전체</div></div>
+    <div class="sum-divider"></div>
+    <div class="sum-item"><div class="sum-val" style="color:#4ade80">${Object.values(shortStatus).filter(s=>s.state==='ok').length}</div><div class="sum-lbl">정답</div></div>
+    <div class="sum-item"><div class="sum-val" style="color:#f87171">${Object.values(shortStatus).filter(s=>s.state==='wrong').length}</div><div class="sum-lbl">오답</div></div>
+    <div class="sum-item"><div class="sum-val" style="color:#fbbf24">${Object.values(shortStatus).filter(s=>s.state==='skip').length}</div><div class="sum-lbl">스킵</div></div>
+    <div class="sum-divider"></div>
+    <div class="sum-pct-bar">
+      <div style="font-size:11px;color:rgba(255,255,255,.55)">정답률</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff">${pct}%</div>
+      <div class="pct-track"><div class="pct-fill" style="width:${pct}%"></div></div>
+    </div>
+  </div>`;
+
+  // Group by category
+  if (curCat === 'all' && !curSearch) {
+    for (const cat of cats) {
+      const catQs = filtered.filter(q => cat.nums.includes(q[0]));
+      if (!catQs.length) continue;
+      html += `<div class="cat-hdr" style="background:${cat.color}"><span>${cat.name}</span><span style="margin-left:auto;opacity:.8;font-size:11px">${catQs.length}문항</span></div>`;
+      html += catQs.map(q => renderQCard(q, cat.color)).join('');
+    }
+  } else {
+    html += filtered.map(q => {
+      const cat = getCat(q[0], cats);
+      return renderQCard(q, cat.color);
+    }).join('');
+  }
+
+  return html;
+}
+
+function renderQCard(q, color) {
+  const num = q[0];
+  const key = String(num);
+  const st = shortStatus[key];
+  const a = SHORT_A.find(r => r[0] === num);
+  const ans = a ? a[1] : '';
+  const ex  = a ? a[2] : '';
+  const kw  = a ? a[3] : '';
+
+  let cardClass = 'qcard';
+  let inputClass = 'ans-input';
+  let disabled = '';
+  let inputVal = '';
+
+  if (st) {
+    if (st.state === 'ok') { cardClass += ' answered-ok'; inputClass += ' ok'; disabled = 'disabled'; inputVal = st.userAns; }
+    else if (st.state === 'wrong') { cardClass += ' answered-wrong'; inputClass += ' wrong'; disabled = 'disabled'; inputVal = st.userAns; }
+    else if (st.state === 'skip') { cardClass += ' skipped'; disabled = 'disabled'; }
+  }
+
+  const resultShow = st && st.state !== 'skip' ? 'show' : '';
+  const resultHTML = (st && st.state !== 'skip') ? `
+    ${st.state==='wrong' ? `<div class="result-wrong-area"><div class="result-label" style="color:var(--red)">❌ 오답 <span style="font-size:11px;font-weight:400;color:var(--muted)">입력: ${escH(st.userAns)}</span></div></div>` : ''}
+    <div class="result-correct">
+      <div class="result-label" style="color:var(--green)">✅ 정답</div>
+      <div class="result-answer">${escH(ans)}</div>
+      <div class="result-explain">${escH(ex)}</div>
+      ${kw ? `<div class="kw-tag"># ${escH(kw)}</div>` : ''}
+    </div>
+    <button class="retry-btn" onclick="retryQ(${num})">↺ 다시 풀기</button>
+  ` : '';
+
+  return `<div class="${cardClass}" id="qcard-${num}">
+    <div class="qcard-top">
+      <div class="qnum" style="background:${color}">${num}</div>
+      <div class="qbody">
+        <div>${formatQuestion(q[1])}</div>
+        ${q[3] ? `<div class="hint">💡 힌트: ${escH(q[3])}</div>` : ''}
+      </div>
+    </div>
+    <div class="qcard-input">
+      <textarea id="input-${num}" class="${inputClass}" rows="${q[2]||1}" placeholder="정답을 입력하세요..." ${disabled}
+        onkeydown="if(event.ctrlKey&&event.key==='Enter'){submitAnswer(${num})}">${escH(inputVal)}</textarea>
+      ${!disabled ? `<button class="submit-btn" onclick="submitAnswer(${num})">확인 ↵</button>
+      <button class="skip-btn" onclick="skipQ(${num})">건너뛰기</button>` : ''}
+    </div>
+    <div class="result-panel ${resultShow}" id="result-${num}">${resultHTML}</div>
+  </div>`;
+}
+
+function renderOX() {
+  const cats = OX_CATS;
+  let filtered = [...OX_Q];
+
+  if (curCat === 'wrong') {
+    filtered = filtered.filter(q => oxStatus[String(q[0])]?.state === 'wrong');
+  } else if (curCat !== 'all') {
+    const c = cats.find(c => c.name === curCat);
+    if (c) filtered = filtered.filter(q => c.nums.includes(q[0]));
+  }
+  if (curSearch) {
+    const s = curSearch.toLowerCase();
+    filtered = filtered.filter(q => q[1].toLowerCase().includes(s));
+  }
+
+  if (!filtered.length) {
+    return `<div class="empty"><div class="empty-icon">${curCat==='wrong'?'🎉':'🔍'}</div><div class="empty-text">${curCat==='wrong'?'틀린 문제가 없습니다! 🎊':'검색 결과가 없습니다.'}</div></div>`;
+  }
+
+  const ok = Object.values(oxStatus).filter(s=>s.state==='ok').length;
+  const wrong = Object.values(oxStatus).filter(s=>s.state==='wrong').length;
+  const done = ok + wrong;
+  const pct = done ? Math.round(ok/done*100) : 0;
+
+  let html = `<div class="summary-bar">
+    <div class="sum-item"><div class="sum-val" style="color:#60a5fa">${OX_Q.length}</div><div class="sum-lbl">전체</div></div>
+    <div class="sum-divider"></div>
+    <div class="sum-item"><div class="sum-val" style="color:#4ade80">${ok}</div><div class="sum-lbl">정답</div></div>
+    <div class="sum-item"><div class="sum-val" style="color:#f87171">${wrong}</div><div class="sum-lbl">오답</div></div>
+    <div class="sum-divider"></div>
+    <div class="sum-pct-bar">
+      <div style="font-size:11px;color:rgba(255,255,255,.55)">정답률</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff">${pct}%</div>
+      <div class="pct-track"><div class="pct-fill" style="width:${pct}%"></div></div>
+    </div>
+  </div>`;
+
+  if (curCat === 'all' && !curSearch) {
+    for (const cat of cats) {
+      const catQs = filtered.filter(q => cat.nums.includes(q[0]));
+      if (!catQs.length) continue;
+      html += `<div class="cat-hdr" style="background:${cat.color}"><span>${cat.name}</span><span style="margin-left:auto;opacity:.8;font-size:11px">${catQs.length}문항</span></div>`;
+      html += catQs.map(q => renderOXCard(q, cat.color)).join('');
+    }
+  } else {
+    html += filtered.map(q => {
+      const cat = getCat(q[0], cats);
+      return renderOXCard(q, cat.color);
+    }).join('');
+  }
+  return html;
+}
+
+function getCat(num, cats) {
+  for (const c of cats) { if (c.nums.includes(num)) return c; }
+  return {name:'기타', color:'#666'};
+}
+
+function renderOXCard(q, color) {
+  const num = q[0];
+  const key = String(num);
+  const st = oxStatus[key];
+  const a = OX_A.find(r => r[0] === num);
+
+  let cardClass = 'oxcard';
+  let btnODisabled = '', btnXDisabled = '', btnOSel = '', btnXSel = '';
+  if (st) {
+    cardClass += st.state === 'ok' ? ' ox-ok' : ' ox-wrong';
+    btnODisabled = 'style="pointer-events:none"';
+    btnXDisabled = 'style="pointer-events:none"';
+    if (st.selected === 'O') btnOSel = 'sel';
+    if (st.selected === 'X') btnXSel = 'sel';
+  }
+
+  const resShow = st ? 'show' : '';
+  let resHTML = '';
+  if (st && a) {
+    const correctLabel = a[1] === 'O' ? '⭕ O (맞음)' : '❌ X (틀림)';
+    const icon = st.state === 'ok' ? (st.selected==='O'?'⭕':'❌') : (st.selected==='O'?'❌':'⭕');
+    resHTML = `
+      <div class="ox-verdict ${st.state==='ok'?'v-o':'v-x'}">${icon}</div>
+      <div class="ox-result-body">
+        <div class="ox-correct-ans">${st.state==='ok'?'✅ 정답!':'❌ 오답 — '}정답: ${correctLabel}</div>
+        <div class="ox-explain">${escH(a[2])}</div>
+      </div>
+    `;
+  }
+
+  return `<div class="${cardClass}" id="oxcard-${num}">
+    <div class="oxcard-top">
+      <div class="oxnum" style="background:${color}">${num}</div>
+      <div class="oxtext">${escH(q[1])}</div>
+    </div>
+    <div class="oxbtn-row" style="border-bottom:${st?'1px solid var(--border)':'none'}">
+      <button id="oxbtn-${num}-O" class="ox-btn ox-btn-o ${btnOSel}" ${btnODisabled} onclick="selectOX(${num},'O')">O</button>
+      <button id="oxbtn-${num}-X" class="ox-btn ox-btn-x ${btnXSel}" ${btnXDisabled} onclick="selectOX(${num},'X')">X</button>
+      <span style="font-size:11px;color:var(--muted);margin-left:8px">O 또는 X를 선택하세요</span>
+    </div>
+    <div class="ox-result ${resShow}" id="ox-res-${num}">${resHTML}</div>
+  </div>`;
+}
+
+function render() {
+  const content = document.getElementById('main-content');
+  content.innerHTML = curTab === 'short' ? renderShort() : renderOX();
+  updateScore();
+}
+
+// ═══════════════════════════════════════
+//  START
+// ═══════════════════════════════════════
+buildCatBtns();
+render();
+</script>
+</body>
+</html>
