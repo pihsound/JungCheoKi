@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>정보처리기사 실기 학습 자료</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #2c2c2c;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 300;
+      opacity: 0.95;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #667eea;
+    }
+
+    .card:nth-child(2) {
+      border-left-color: #764ba2;
+    }
+
+    .card:nth-child(3) {
+      border-left-color: #f093fb;
+    }
+
+    .card:nth-child(4) {
+      border-left-color: #4facfe;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      height: 45px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.4;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      background: #f0f0f0;
+      color: #666;
+      font-weight: 500;
+      width: fit-content;
+    }
+
+    .card:hover .card-tag {
+      background: #e8e8e8;
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      header {
+        margin-bottom: 2rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>정보처리기사 실기</h1>
+      <p class="subtitle">2026 합격을 위한 종합 학습 자료</p>
+    </header>
+
+    <div class="cards">
+      <a href="Read.html" class="card">
+        <div class="card-icon">📖</div>
+        <h2>단권화 노트</h2>
+        <p>정보처리기사 실기의 핵심 개념을 한 권으로 정리한 학습 가이드</p>
+        <span class="card-tag">이론 학습</span>
+      </a>
+
+      <a href="Full.html" class="card">
+        <div class="card-icon">🎯</div>
+        <h2>예상문제 40선</h2>
+        <p>C·Java·Python·SQL·설계 패턴 등 실기 필출 예상문제 40선</p>
+        <span class="card-tag">기출·예상</span>
+      </a>
+
+      <a href="Q200.html" class="card">
+        <div class="card-icon">✍️</div>
+        <h2>주관식 200제</h2>
+        <p>정처기 실기의 주관식 예상문제 200개로 실전 대비</p>
+        <span class="card-tag">주관식</span>
+      </a>
+
+      <a href="FlashCard.html" class="card">
+        <div class="card-icon">⚡</div>
+        <h2>마무리 플래시카드</h2>
+        <p>시험 직전 빠른 복습을 위한 핵심 플래시카드</p>
+        <span class="card-tag">마무리</span>
+      </a>
+    </div>
+
+    <footer>
+      💡 원하는 학습 자료를 선택하여 시작하세요
+    </footer>
+  </div>
+</body>
+</html>
