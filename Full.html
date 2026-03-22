@@ -14,14 +14,6 @@
 <meta property="og:locale" content="ko_KR">
 <link rel="canonical" href="https://example.com/정보처리기사-실기-예상문제">
 
-<!-- ═══════════════════════════════════════════════════
-     Google AdSense 스크립트
-     아래 ca-pub-XXXXXXXXXXXXXXXXXX 를 본인의 게시자 ID로 교체하세요.
-     https://www.google.com/adsense 에서 확인 가능합니다.
-════════════════════════════════════════════════════ -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXXX"
-     crossorigin="anonymous"></script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -71,54 +63,6 @@ body {
 }
 
 /* 사이드 광고 – fixed 포지셔닝으로 항상 양쪽에 고정 */
-.ad-sidebar {
-  position: fixed;
-  top: 20px;
-  width: 160px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: center;
-  z-index: 100;
-}
-aside.ad-sidebar:nth-of-type(1) {
-  left: 10px;
-}
-aside.ad-sidebar:nth-of-type(2) {
-  right: 10px;
-}
-
-.ad-unit {
-  width: 160px;
-  background: #eef2f7;
-  border: 1.5px dashed #b0bec5;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  color: #90a4ae;
-  font-size: 11px;
-  text-align: center;
-  overflow: hidden;
-}
-.ad-unit-skyscraper { height: 600px; }
-.ad-unit-rect       { height: 250px; }
-
-.ad-unit ins.adsbygoogle {
-  display: block;
-  width: 160px;
-}
-/* ins가 로드되기 전 placeholder 라벨 */
-.ad-label {
-  font-size: 10px;
-  letter-spacing: 0.5px;
-  color: #b0bec5;
-  padding: 4px 0 2px;
-  text-transform: uppercase;
-}
-
 /* 본문 영역 */
 .main-content {
   width: 100%;
@@ -126,42 +70,11 @@ aside.ad-sidebar:nth-of-type(2) {
   margin: 0 auto;
 }
 
-/* 광고 없는 좁은 화면 처리 */
-@media (max-width: 1100px) {
-  .ad-sidebar { display: none; }
-  .tab-nav { padding: 0 20px !important; }
-  .exam-header { padding: 32px 20px 28px !important; }
-  .ad-top-banner-wrap { padding: 16px 20px 0 !important; }
-}
-
 /* ══════════════════════════════════════
    TOP BANNER AD (본문 상단 수평)
 ══════════════════════════════════════ */
-.ad-top-banner {
-  width: 100%;
-  background: #eef2f7;
-  border: 1.5px dashed #b0bec5;
-  border-radius: 10px;
-  height: 90px;
-  display: flex; align-items: center; justify-content: center;
-  color: #90a4ae; font-size: 12px; letter-spacing: 0.5px;
-  margin: 16px 0;
-}
-.ad-top-banner ins.adsbygoogle { display: block; }
 
 /* ══════════════════════════════════════
-   BETWEEN SETS AD (A세트와 B세트 사이)
-══════════════════════════════════════ */
-.ad-between-sets {
-  margin: 32px 40px;
-  background: #eef2f7;
-  border: 1.5px dashed #b0bec5;
-  border-radius: 12px;
-  height: 100px;
-  display: flex; align-items: center; justify-content: center;
-  color: #90a4ae; font-size: 12px; letter-spacing: 0.5px;
-}
-.ad-between-sets ins.adsbygoogle { display: block; }
 
 /* ══════════════════════════════════════
    TAB NAVIGATION
@@ -434,7 +347,6 @@ hr.section-sep { border: none; border-top: 2px dashed var(--border); margin: 8px
   .exam-title { font-size: 22px; }
   .section-divider, .questions-wrapper, .solutions-section { padding-left: 16px; padding-right: 16px; }
   hr.section-sep { margin: 8px 16px; }
-  .ad-between-sets { margin: 24px 16px; }
   .tab-nav { padding: 0 16px !important; }
   .lbl-row { grid-template-columns: 1fr; }
   .lbl-code { border-right: none; border-bottom: 1px solid var(--border); }
@@ -1125,44 +1037,8 @@ h1.exam-title, h1.guide-title {
 </head>
 <body>
 <!-- ── 왼쪽 사이드 광고 ── -->
-<aside class="ad-sidebar" aria-label="광고">
-
-  <!-- 왼쪽 스카이스크래퍼 (160×600)
-       data-ad-client: 본인의 ca-pub-XXXX 로 교체
-       data-ad-slot: AdSense에서 발급된 광고 단위 슬롯 ID로 교체 -->
-  <div class="ad-unit ad-unit-skyscraper">
-    <span class="ad-label">광고</span>
-    <ins class="adsbygoogle"
-         style="display:block;width:160px;height:600px;"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXXX"
-         data-ad-slot="0000000001"
-         data-ad-format="fixed"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-
-  <!-- 왼쪽 직사각형 (160×250) -->
-  <div class="ad-unit ad-unit-rect">
-    <span class="ad-label">광고</span>
-    <ins class="adsbygoogle"
-         style="display:block;width:160px;height:250px;"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXXX"
-         data-ad-slot="0000000002"
-         data-ad-format="fixed"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-
-</aside>
-
 <div class="page-wrapper">
   <main class="main-content">
-<div class="ad-top-banner-wrap" style="padding:16px 200px 0;">
-  <div class="ad-top-banner">
-    <ins class="adsbygoogle" style="display:block;width:100%;height:90px;"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXXX" data-ad-slot="0000000003"
-         data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-  </div>
-</div>
     <nav class="tab-nav" role="tablist">
       <button class="tab-btn active" id="tab-a" role="tab" aria-selected="true"  aria-controls="panel-a"   onclick="switchTab('a')">A세트 · 고난도 <span class="tb-badge">20문항</span></button>
       <button class="tab-btn"        id="tab-b" role="tab" aria-selected="false" aria-controls="panel-b"   onclick="switchTab('b')">B세트 · 기출수준 <span class="tb-badge">20문항</span></button>
@@ -3980,31 +3856,6 @@ TCL: COMMIT, ROLLBACK</span></div>
   </main>
 </div>
 <!-- ── 오른쪽 사이드 광고 ── -->
-<aside class="ad-sidebar" aria-label="광고">
-
-  <!-- 오른쪽 스카이스크래퍼 (160×600) -->
-  <div class="ad-unit ad-unit-skyscraper">
-    <span class="ad-label">광고</span>
-    <ins class="adsbygoogle"
-         style="display:block;width:160px;height:600px;"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXXX"
-         data-ad-slot="0000000005"
-         data-ad-format="fixed"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-
-  <!-- 오른쪽 직사각형 (160×250) -->
-  <div class="ad-unit ad-unit-rect">
-    <span class="ad-label">광고</span>
-    <ins class="adsbygoogle"
-         style="display:block;width:160px;height:250px;"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXXX"
-         data-ad-slot="0000000006"
-         data-ad-format="fixed"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-
-</aside>
 <script>
 const ANSWERS = {
   a: {
